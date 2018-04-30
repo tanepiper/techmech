@@ -1,0 +1,133 @@
+[
+  {
+    "name": "Locust",
+    "class": "Light",
+    "weightMax": 20,
+    "damageMelee": 15,
+    "damageDFA": 50,
+    "initiative": 4,
+    "penaltyToHit": 2,
+    "models": [
+      {
+        "model": "LCT-1V",
+        "weightFree": 7,
+        "walkSpeed": 210,
+        "jetsMax": 8,
+        "regions": {
+          "head": {
+            "hardpoints": [],
+            "armour": [45]
+          },
+          "torsoRight": {
+            "hardpoints": [],
+            "armour": [50, 25]
+          },
+          "torsoLeft": {
+            "hardpoints": [],
+            "armour": [50, 25]
+          },
+          "torsoCenter": {
+            "hardpoints": [0, 1, 0, 1],
+            "armour": [60, 30]
+          },
+          "armRight": {
+            "hardpoints": [1, 0, 0, 1],
+            "armour": [30]
+          },
+          "armLeft": {
+            "hardpoints": [1, 0, 0, 1],
+            "armour": [30]
+          },
+          "legRight": {
+            "hardpoints": [],
+            "armour": [40]
+          },
+          "legLeft": {
+            "hardpoints": [],
+            "armour": [40]
+          }
+        }
+      },
+      {
+        "model": "LCT-1S",
+        "weightFree": 7,
+        "walkSpeed": 210,
+        "jetsMax": 8,
+        "regions": {
+          "head": {
+            "hardpoints": [],
+            "armour": [45]
+          },
+          "torsoRight": {
+            "hardpoints": [],
+            "armour": [50, 25]
+          },
+          "torsoLeft": {
+            "hardpoints": [],
+            "armour": [50, 25]
+          },
+          "torsoCenter": {
+            "hardpoints": [0, 1, 0, 1],
+            "armour": [60, 30]
+          },
+          "armRight": {
+            "hardpoints": [0, 0, 2, 0],
+            "armour": [30]
+          },
+          "armLeft": {
+            "hardpoints": [0, 0, 2, 0],
+            "armour": [30]
+          },
+          "legRight": {
+            "hardpoints": [],
+            "armour": [40]
+          },
+          "legLeft": {
+            "hardpoints": [],
+            "armour": [40]
+          }
+        }
+      },
+      {
+        "model": "LCT-1M",
+        "weightFree": 7,
+        "walkSpeed": 210,
+        "jetsMax": 8,
+        "regions": {
+          "head": {
+            "hardpoints": [],
+            "armour": [45]
+          },
+          "torsoRight": {
+            "hardpoints": [],
+            "armour": [50, 25]
+          },
+          "torsoLeft": {
+            "hardpoints": [],
+            "armour": [50, 25]
+          },
+          "torsoCenter": {
+            "hardpoints": [0, 2, 0, 2],
+            "armour": [60, 30]
+          },
+          "armRight": {
+            "hardpoints": [0, 0, 1, 0],
+            "armour": [30]
+          },
+          "armLeft": {
+            "hardpoints": [0, 0, 1, 0],
+            "armour": [30]
+          },
+          "legRight": {
+            "hardpoints": [],
+            "armour": [40]
+          },
+          "legLeft": {
+            "hardpoints": [],
+            "armour": [40]
+          }
+        }
+      }
+    ]
+  }
+]
