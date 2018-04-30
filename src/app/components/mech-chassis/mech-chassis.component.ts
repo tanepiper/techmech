@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, Input } from '@angular/core';
 
 interface MechRegionComponent {
   name: string;
@@ -10,6 +10,9 @@ interface MechRegionComponent {
   styleUrls: ['mech-chassis.component.scss']
 })
 export class MechChassisComponent implements OnInit {
+
+  @Input() selectedMech: any;
+
   name: string;
 
   model: string;

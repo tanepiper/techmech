@@ -28,4 +28,4 @@ export function reducer(state: MechsState = initialState, action: mechActions.Me
   }
 }
 
-export const getMechs = (state: MechsState) => state;
+export const getMechs = (state: MechsState) => state.data;

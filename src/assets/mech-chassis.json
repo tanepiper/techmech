@@ -9,7 +9,7 @@
     "penaltyToHit": 2,
     "models": [
       {
-        "model": "LCT-1V",
+        "name": "LCT-1V",
         "weightFree": 7,
         "walkSpeed": 210,
         "jetsMax": 8,
@@ -49,7 +49,7 @@
         }
       },
       {
-        "model": "LCT-1S",
+        "name": "LCT-1S",
         "weightFree": 7,
         "walkSpeed": 210,
         "jetsMax": 8,
@@ -89,7 +89,7 @@
         }
       },
       {
-        "model": "LCT-1M",
+        "name": "LCT-1M",
         "weightFree": 7,
         "walkSpeed": 210,
         "jetsMax": 8,

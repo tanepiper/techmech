@@ -1,15 +1,15 @@
-<div *ngIf="mechList$ | async; let mechList; else noData">
-  <ul>
-    <li *ngFor="let mech of mechList.data">
-      <p><strong>{{mech.name}} ({{mech.class}})</strong></p>
-      <ul>
-        <li *ngFor="let model of mech.models">
-          {{model.model}}
+<ngb-tabset>
+  <ngb-tab title="Mechs">
+    <ng-template ngbTabContent>
+      <ul class="nav flex-column" *ngIf="mechList$ | async; let mechList; else noMechData">
+        <li class="nav-item" *ngFor="let mechClass of mechList | keysOf">
+          <strong>{{mechClass}}</strong>
+          <tree-root [nodes]="mechList[mechClass]" [options]="options"></tree-root>
         </li>
       </ul>
-    </li>
-  </ul>
-</div>
-<ng-template #noData>
-  No Data
-</ng-template>
+      <ng-template #noMechData>
+        <strong>No Mech Data</strong>
+      </ng-template>
+    </ng-template>
+  </ngb-tab>
+</ngb-tabset>

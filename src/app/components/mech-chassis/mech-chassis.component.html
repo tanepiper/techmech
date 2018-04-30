@@ -1,3 +1,187 @@
-<p>
-  mech-chassis works!
-</p>
+<div *ngIf="selectedMech; else noData">
+  <h1>
+    {{selectedMech?.mech?.name}}
+    <small>{{selectedMech?.model?.name}}</small>
+  </h1>
+  <h2>Class: {{selectedMech?.mech?.class}}
+    <small>(Initiative: {{selectedMech?.mech?.initiative}})</small>
+  </h2>
+
+  <div class="table-responsive">
+    <table class="table">
+      <thead>
+        <tr>
+          <th>Weight</th>
+          <th>Movement Speed</th>
+          <th>To Hit Penalty</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr>
+          <td>0 / {{selectedMech?.mech?.weightMax}}</td>
+          <td>{{selectedMech?.model?.walkSpeed}}</td>
+          <td>{{selectedMech?.mech?.penaltyToHit}}</td>
+        </tr>
+      </tbody>
+    </table>
+  </div>
+
+  <div class="body-zone">
+    <h3>Body Regions</h3>
+    <div class="row">
+      <div class="col">
+        <h4>Head</h4>
+        <dl>
+          <dt>Max Armour</dt>
+          <dd>Front: {{selectedMech?.model?.regions?.head.armour[0]}}</dd>
+          <dt>Hardpoints</dt>
+          <dd>
+            <ul>
+              <li>Balistic: {{selectedMech?.model?.regions?.head?.hardpoints[0] || 0}}</li>
+              <li>Energy: {{selectedMech?.model?.regions?.head?.hardpoints[1] || 0}}</li>
+              <li>Missile: {{selectedMech?.model?.regions?.head?.hardpoints[2] || 0}}</li>
+              <li>Support: {{selectedMech?.model?.regions?.head?.hardpoints[3] || 0}}</li>
+            </ul>
+          </dd>
+        </dl>
+      </div>
+    </div>
+    <div class="row">
+      <div class="col">
+        <h4>Right Arm</h4>
+        <dl>
+          <dt>Max Armour</dt>
+          <dd>
+            Front: {{selectedMech?.model?.regions?.armRight.armour[0]}}
+          </dd>
+          <dt>Hardpoints</dt>
+          <dd>
+            <ul>
+              <li>Balistic: {{selectedMech?.model?.regions?.armRight?.hardpoints[0] || 0}}</li>
+              <li>Energy: {{selectedMech?.model?.regions?.armRight?.hardpoints[1] || 0}}</li>
+              <li>Missile: {{selectedMech?.model?.regions?.armRight?.hardpoints[2] || 0}}</li>
+              <li>Support: {{selectedMech?.model?.regions?.armRight?.hardpoints[3] || 0}}</li>
+            </ul>
+          </dd>
+        </dl>
+      </div>
+      <div class="col">
+        <h4>Right Torso</h4>
+        <dl>
+          <dt>Max Armour</dt>
+          <dd>
+            Front: {{selectedMech?.model?.regions?.torsoRight.armour[0]}} Rear: {{selectedMech?.model?.regions?.torsoRight.armour[1]}}
+          </dd>
+          <dt>Hardpoints</dt>
+          <dd>
+            <ul>
+              <li>Balistic: {{selectedMech?.model?.regions?.torsoRight?.hardpoints[0] || 0}}</li>
+              <li>Energy: {{selectedMech?.model?.regions?.torsoRight?.hardpoints[1] || 0}}</li>
+              <li>Missile: {{selectedMech?.model?.regions?.torsoRight?.hardpoints[2] || 0}}</li>
+              <li>Support: {{selectedMech?.model?.regions?.torsoRight?.hardpoints[3] || 0}}</li>
+            </ul>
+          </dd>
+        </dl>
+      </div>
+
+      <div class="col">
+        <h4>Center Torso</h4>
+        <dl>
+          <dt>Max Armour</dt>
+          <dd>
+            Front: {{selectedMech?.model?.regions?.torsoCenter.armour[0]}} Rear: {{selectedMech?.model?.regions?.torsoCenter.armour[1]}}
+          </dd>
+          <dt>Hardpoints</dt>
+          <dd>
+            <ul>
+              <li>Balistic: {{selectedMech?.model?.regions?.torsoCenter?.hardpoints[0] || 0}}</li>
+              <li>Energy: {{selectedMech?.model?.regions?.torsoCenter?.hardpoints[1] || 0}}</li>
+              <li>Missile: {{selectedMech?.model?.regions?.torsoCenter?.hardpoints[2] || 0}}</li>
+              <li>Support: {{selectedMech?.model?.regions?.torsoCenter?.hardpoints[3] || 0}}</li>
+            </ul>
+          </dd>
+        </dl>
+      </div>
+
+      <div class="col">
+        <h4>Left Torso</h4>
+        <dl>
+          <dt>Max Armour</dt>
+          <dd>
+            Front: {{selectedMech?.model?.regions?.torsoLeft.armour[0]}} Rear: {{selectedMech?.model?.regions?.torsoLeft.armour[1]}}
+          </dd>
+          <dt>Hardpoints</dt>
+          <dd>
+            <ul>
+              <li>Balistic: {{selectedMech?.model?.regions?.torsoLeft?.hardpoints[0] || 0}}</li>
+              <li>Energy: {{selectedMech?.model?.regions?.torsoLeft?.hardpoints[1] || 0}}</li>
+              <li>Missile: {{selectedMech?.model?.regions?.torsoLeft?.hardpoints[2] || 0}}</li>
+              <li>Support: {{selectedMech?.model?.regions?.torsoLeft?.hardpoints[3] || 0}}</li>
+            </ul>
+          </dd>
+        </dl>
+      </div>
+
+      <div class="col">
+        <h4>Left Arm</h4>
+        <dl>
+          <dt>Max Armour</dt>
+          <dd>
+            Front: {{selectedMech?.model?.regions?.armLeft.armour[0]}}
+          </dd>
+          <dt>Hardpoints</dt>
+          <dd>
+            <ul>
+              <li>Balistic: {{selectedMech?.model?.regions?.armLeft?.hardpoints[0] || 0}}</li>
+              <li>Energy: {{selectedMech?.model?.regions?.armLeft?.hardpoints[1] || 0}}</li>
+              <li>Missile: {{selectedMech?.model?.regions?.armLeft?.hardpoints[2] || 0}}</li>
+              <li>Support: {{selectedMech?.model?.regions?.armLeft?.hardpoints[3] || 0}}</li>
+            </ul>
+          </dd>
+        </dl>
+      </div>
+    </div>
+
+    <div class="row">
+      <div class="col">
+        <h4>Right Leg</h4>
+        <dl>
+          <dt>Max Armour</dt>
+          <dd>Front: {{selectedMech?.model?.regions?.legRight.armour[0]}}</dd>
+          <dt>Hardpoints</dt>
+          <dd>
+            <ul>
+              <li>Balistic: {{selectedMech?.model?.regions?.legRight?.hardpoints[0] || 0}}</li>
+              <li>Energy: {{selectedMech?.model?.regions?.legRight?.hardpoints[1] || 0}}</li>
+              <li>Missile: {{selectedMech?.model?.regions?.legRight?.hardpoints[2] || 0}}</li>
+              <li>Support: {{selectedMech?.model?.regions?.legRight?.hardpoints[3] || 0}}</li>
+            </ul>
+          </dd>
+        </dl>
+      </div>
+      <div class="col">
+          <h4>Left Leg</h4>
+          <dl>
+            <dt>Max Armour</dt>
+            <dd>Front: {{selectedMech?.model?.regions?.legLeft.armour[0]}}</dd>
+            <dt>Hardpoints</dt>
+            <dd>
+              <ul>
+                <li>Balistic: {{selectedMech?.model?.regions?.legLeft?.hardpoints[0] || 0}}</li>
+                <li>Energy: {{selectedMech?.model?.regions?.legLeft?.hardpoints[1] || 0}}</li>
+                <li>Missile: {{selectedMech?.model?.regions?.legLeft?.hardpoints[2] || 0}}</li>
+                <li>Support: {{selectedMech?.model?.regions?.legLeft?.hardpoints[3] || 0}}</li>
+              </ul>
+            </dd>
+          </dl>
+        </div>
+    </div>
+
+  </div>
+
+
+  <pre>{{ selectedMech | json }}</pre>
+</div>
+<ng-template #noData>
+  <h1>Select a mech</h1>
+</ng-template>
