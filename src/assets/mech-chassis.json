@@ -15,36 +15,100 @@
         "jetsMax": 8,
         "regions": {
           "head": {
-            "hardpoints": [],
-            "armour": [45]
+            "hardpoints": {
+              "balistic": 0,
+              "energy": 0,
+              "missile": 0,
+              "support": 0
+            },
+            "armour": {
+              "front": 45,
+              "back": 0
+            }
           },
           "torsoRight": {
-            "hardpoints": [],
-            "armour": [50, 25]
+            "hardpoints": {
+              "balistic": 0,
+              "energy": 0,
+              "missile": 0,
+              "support": 0
+            },
+            "armour": {
+              "front": 50,
+              "back": 25
+            }
           },
           "torsoLeft": {
-            "hardpoints": [],
-            "armour": [50, 25]
+            "hardpoints": {
+              "balistic": 0,
+              "energy": 0,
+              "missile": 0,
+              "support": 0
+            },
+            "armour": {
+              "front": 50,
+              "back": 25
+            }
           },
           "torsoCenter": {
-            "hardpoints": [0, 1, 0, 1],
-            "armour": [60, 30]
+            "hardpoints": {
+              "balistic": 0,
+              "energy": 1,
+              "missile": 0,
+              "support": 1
+            },
+            "armour": {
+              "front": 60,
+              "back": 30
+            }
           },
           "armRight": {
-            "hardpoints": [1, 0, 0, 1],
-            "armour": [30]
+            "hardpoints": {
+              "balistic": 1,
+              "energy": 0,
+              "missile": 0,
+              "support": 1
+            },
+            "armour": {
+              "front": 30,
+              "back": 0
+            }
           },
           "armLeft": {
-            "hardpoints": [1, 0, 0, 1],
-            "armour": [30]
+            "hardpoints": {
+              "balistic": 1,
+              "energy": 0,
+              "missile": 0,
+              "support": 1
+            },
+            "armour": {
+              "front": 30,
+              "back": 0
+            }
           },
           "legRight": {
-            "hardpoints": [],
-            "armour": [40]
+            "hardpoints": {
+              "balistic": 0,
+              "energy": 0,
+              "missile": 0,
+              "support": 0
+            },
+            "armour": {
+              "front": 40,
+              "back": 0
+            }
           },
           "legLeft": {
-            "hardpoints": [],
-            "armour": [40]
+            "hardpoints": {
+              "balistic": 0,
+              "energy": 0,
+              "missile": 0,
+              "support": 0
+            },
+            "armour": {
+              "front": 40,
+              "back": 0
+            }
           }
         }
       },
@@ -55,36 +119,100 @@
         "jetsMax": 8,
         "regions": {
           "head": {
-            "hardpoints": [],
-            "armour": [45]
+            "hardpoints": {
+              "balistic": 0,
+              "energy": 0,
+              "missile": 0,
+              "support": 0
+            },
+            "armour": {
+              "front": 45,
+              "back": 0
+            }
           },
           "torsoRight": {
-            "hardpoints": [],
-            "armour": [50, 25]
+            "hardpoints": {
+              "balistic": 0,
+              "energy": 0,
+              "missile": 0,
+              "support": 0
+            },
+            "armour": {
+              "front": 50,
+              "back": 25
+            }
           },
           "torsoLeft": {
-            "hardpoints": [],
-            "armour": [50, 25]
+            "hardpoints": {
+              "balistic": 0,
+              "energy": 0,
+              "missile": 0,
+              "support": 0
+            },
+            "armour": {
+              "front": 50,
+              "back": 25
+            }
           },
           "torsoCenter": {
-            "hardpoints": [0, 1, 0, 1],
-            "armour": [60, 30]
+            "hardpoints": {
+              "balistic": 0,
+              "energy": 1,
+              "missile": 0,
+              "support": 1
+            },
+            "armour": {
+              "front": 60,
+              "back": 30
+            }
           },
           "armRight": {
-            "hardpoints": [0, 0, 2, 0],
-            "armour": [30]
+            "hardpoints": {
+              "balistic": 0,
+              "energy": 0,
+              "missile": 2,
+              "support": 0
+            },
+            "armour": {
+              "front": 30,
+              "back": 0
+            }
           },
           "armLeft": {
-            "hardpoints": [0, 0, 2, 0],
-            "armour": [30]
+            "hardpoints": {
+              "balistic": 0,
+              "energy": 0,
+              "missile": 2,
+              "support": 0
+            },
+            "armour": {
+              "front": 30,
+              "back": 0
+            }
           },
           "legRight": {
-            "hardpoints": [],
-            "armour": [40]
+            "hardpoints": {
+              "balistic": 0,
+              "energy": 0,
+              "missile": 0,
+              "support": 0
+            },
+            "armour": {
+              "front": 40,
+              "back": 0
+            }
           },
           "legLeft": {
-            "hardpoints": [],
-            "armour": [40]
+            "hardpoints": {
+              "balistic": 0,
+              "energy": 0,
+              "missile": 0,
+              "support": 0
+            },
+            "armour": {
+              "front": 40,
+              "back": 0
+            }
           }
         }
       },
@@ -95,36 +223,100 @@
         "jetsMax": 8,
         "regions": {
           "head": {
-            "hardpoints": [],
-            "armour": [45]
+            "hardpoints": {
+              "balistic": 0,
+              "energy": 0,
+              "missile": 0,
+              "support": 0
+            },
+            "armour": {
+              "front": 45,
+              "back": 0
+            }
           },
           "torsoRight": {
-            "hardpoints": [],
-            "armour": [50, 25]
+            "hardpoints": {
+              "balistic": 0,
+              "energy": 0,
+              "missile": 0,
+              "support": 0
+            },
+            "armour": {
+              "front": 50,
+              "back": 25
+            }
           },
           "torsoLeft": {
-            "hardpoints": [],
-            "armour": [50, 25]
+            "hardpoints": {
+              "balistic": 0,
+              "energy": 0,
+              "missile": 0,
+              "support": 0
+            },
+            "armour": {
+              "front": 50,
+              "back": 25
+            }
           },
           "torsoCenter": {
-            "hardpoints": [0, 2, 0, 2],
-            "armour": [60, 30]
+            "hardpoints": {
+              "balistic": 0,
+              "energy": 2,
+              "missile": 0,
+              "support": 2
+            },
+            "armour": {
+              "front": 60,
+              "back": 30
+            }
           },
           "armRight": {
-            "hardpoints": [0, 0, 1, 0],
-            "armour": [30]
+            "hardpoints": {
+              "balistic": 0,
+              "energy": 0,
+              "missile": 1,
+              "support": 0
+            },
+            "armour": {
+              "front": 30,
+              "back": 0
+            }
           },
           "armLeft": {
-            "hardpoints": [0, 0, 1, 0],
-            "armour": [30]
+            "hardpoints": {
+              "balistic": 0,
+              "energy": 0,
+              "missile": 1,
+              "support": 0
+            },
+            "armour": {
+              "front": 30,
+              "back": 0
+            }
           },
           "legRight": {
-            "hardpoints": [],
-            "armour": [40]
+            "hardpoints": {
+              "balistic": 0,
+              "energy": 0,
+              "missile": 0,
+              "support": 0
+            },
+            "armour": {
+              "front": 40,
+              "back": 0
+            }
           },
           "legLeft": {
-            "hardpoints": [],
-            "armour": [40]
+            "hardpoints": {
+              "balistic": 0,
+              "energy": 0,
+              "missile": 0,
+              "support": 0
+            },
+            "armour": {
+              "front": 40,
+              "back": 0
+            }
           }
         }
       }

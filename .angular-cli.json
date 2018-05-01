@@ -20,7 +20,9 @@
       "prefix": "app",
       "styles": [
         "../node_modules/bootstrap/dist/css/bootstrap.min.css",
+        "assets/tabler/bundle.scss",
         "../node_modules/angular-tree-component/dist/angular-tree-component.css",
+        "../node_modules/ng-drag-drop/style.css",
         "styles.scss"
       ],
       "scripts": [],

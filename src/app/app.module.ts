@@ -1,45 +1,40 @@
-import { BrowserModule } from '@angular/platform-browser';
-import { NgModule } from '@angular/core';
 import { HttpClientModule } from '@angular/common/http';
-import { StoreModule } from '@ngrx/store';
-import { EffectsModule } from '@ngrx/effects';
-import { StoreDevtoolsModule } from '@ngrx/store-devtools';
+import { NgModule } from '@angular/core';
+import { BrowserModule } from '@angular/platform-browser';
 import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
-import { TreeModule } from 'angular-tree-component';
+import { EffectsModule } from '@ngrx/effects';
+import { StoreModule } from '@ngrx/store';
+import { StoreDevtoolsModule } from '@ngrx/store-devtools';
+import { WebStorageModule } from 'ngx-store';
 
+// Components
+import { HeaderComponent } from './components/header/header.component';
+import { MainNavigationComponent } from './components/main-navigation/main-navigation.component';
+// Containers
+import { AppContainerComponent } from './containers/app-container/app-container.component';
+// App Routing
 import { AppRoutingModule } from './routes/app-routing.module';
 
-// Containers
-import { AppComponent } from './app.component';
-import { AppContainerComponent } from './containers/app-container/app-container.component';
-// Components
-import { SidebarComponent } from './components/sidebar/sidebar.component';
-import { MechChassisComponent } from './components/mech-chassis/mech-chassis.component';
-// Services
-import { AppService } from './services/app.service';
-// Reducers
-import { reducers, effects } from './store';
-// Guards
-import { AppGuard } from './guards/app.guard';
-
-// Pipes
-import { KeysOfPipe } from './pipes/keys.pipe';
+// Modules
+import { TMSettingsModule } from './modules/settings/settings.module';
+import { TmLanceManagerModule } from './modules/lance-manager/lance-manager.module';
 
 const HEX_DISTANCE = 24; // Distance in meters is 24m per hex
 
 @NgModule({
-  declarations: [AppComponent, AppContainerComponent, SidebarComponent, MechChassisComponent, KeysOfPipe],
+  declarations: [AppContainerComponent, HeaderComponent, MainNavigationComponent],
   imports: [
     BrowserModule,
     HttpClientModule,
-    StoreModule.forRoot(reducers),
-    EffectsModule.forRoot(effects),
+    StoreModule.forRoot({}),
+    EffectsModule.forRoot([]),
     StoreDevtoolsModule.instrument(),
     NgbModule.forRoot(),
-    TreeModule,
+    WebStorageModule,
+    TMSettingsModule,
+    TmLanceManagerModule,
     AppRoutingModule
   ],
-  providers: [AppService, AppGuard],
-  bootstrap: [AppComponent]
+  bootstrap: [AppContainerComponent]
 })
 export class AppModule {}

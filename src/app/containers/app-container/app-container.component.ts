@@ -1,25 +1,20 @@
 import { Component } from '@angular/core';
 
 @Component({
-  selector: 'app-container',
-  templateUrl: './app-container.component.html',
-  styleUrls: ['app-container.component.scss']
+  selector: 'tm-root',
+  template: `
+  <div class="page">
+    <div class="page-main">
+      <tm-header></tm-header>
+      <tm-main-navigation></tm-main-navigation>
+
+      <section class="my-3 my-md-5">
+      <div class="container">
+        <router-outlet></router-outlet>
+      </div>
+      </section>
+    </div>
+  </div>
+  `
 })
-export class AppContainerComponent {
-  selectedMech: any;
-
-  constructor() {}
-
-  setSelectedMech(mechId) {
-    this.selectedMech = mechId;
-  }
-
-  onClick(node) {
-    console.log('OnClick', node.data);
-  }
-
-  onDblClick(node) {
-    console.log('OnDblClick', node.data);
-    this.selectedMech = node.data;
-  }
-}
+export class AppContainerComponent {}

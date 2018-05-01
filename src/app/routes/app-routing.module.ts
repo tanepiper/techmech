@@ -1,16 +1,13 @@
 import { NgModule } from '@angular/core';
 import { Routes, RouterModule } from '@angular/router';
 
-import { AppContainerComponent } from '../containers/app-container/app-container.component';
-import { AppGuard } from '../guards/app.guard';
+import { TMSettingsContainerComponent } from '../modules/settings/containers/settings-container/settings-container.component';
+import { TMLanceManagerComponent } from '../modules/lance-manager/containers/lance-manager/lance-manager.component';
 
 const routes: Routes = [
-  {
-    path: '',
-    canActivate: [AppGuard],
-    component: AppContainerComponent,
-    pathMatch: 'full'
-  }
+  { path: '', redirectTo: 'settings', pathMatch: 'full' },
+  { path: 'settings', component: TMSettingsContainerComponent },
+  { path: 'lance-manager', component: TMLanceManagerComponent }
 ];
 
 @NgModule({
