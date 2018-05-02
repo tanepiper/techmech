@@ -128,6 +128,7 @@ export class TMMechwarriorsComponent implements OnInit {
       /** TODO: Turn this into flavour text via a data service */
       name: '',
       description: '',
+      type: '',
       stats: {
         gunnery: 4,
         piloting: 4,

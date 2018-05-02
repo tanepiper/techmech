@@ -2,6 +2,7 @@ export interface Mechwarrior {
   id?: number;
   name: string;
   description: string;
+  type: string;
   stats: {
     gunnery: number;
     piloting: number;

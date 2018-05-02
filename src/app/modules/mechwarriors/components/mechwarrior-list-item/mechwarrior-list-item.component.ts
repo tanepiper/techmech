@@ -16,13 +16,13 @@ import { Mechwarrior, SkillLevels } from '../../models/mechwarriors';
         </div>
       </div>
       <div class="card-body">
-        <tm-mechwarrior-form (save)="onSave($event)" [mechwarrior]="mechwarrior"></tm-mechwarrior-form>
+        <tm-mechwarrior-form (save)="onSave($event)" [mechwarrior]="mechwarrior" [skills]="skills"></tm-mechwarrior-form>
       </div>
     </div>
 
     <div *ngIf="!editing">
       <div class="card-header">
-        <h3 class="card-title">{{mechwarrior.name}}</h3>
+        <h3 class="card-title">{{mechwarrior.name}} ({{mechwarrior.type}})</h3>
         <div class="card-options">
           <a (click)="onEdit()" class="card-options-collapse" data-toggle="card-collapse"><i class="fe fe-edit"></i></a>
           <a (click)="onDeleteMechwarrior($event)" class="card-options-remove" data-toggle="card-remove"><i class="fe fe-x"></i></a>
@@ -35,14 +35,17 @@ import { Mechwarrior, SkillLevels } from '../../models/mechwarriors';
 
       <div class="card-body">
         <div class="container">
-
           <div class="row">
             <h3>Skills</h3>
           </div>
-          <tm-skill-tree [skill]="skills.gunnery" [mechwarrior]="mechwarrior"></tm-skill-tree>
-          <tm-skill-tree [skill]="skills.piloting" [mechwarrior]="mechwarrior"></tm-skill-tree>
-          <tm-skill-tree [skill]="skills.guts" [mechwarrior]="mechwarrior"></tm-skill-tree>
-          <tm-skill-tree [skill]="skills.tactics" [mechwarrior]="mechwarrior"></tm-skill-tree>
+          <tm-skill-tree [editMode]="false" [skill]="skills.gunnery"
+            [mechwarrior]="mechwarrior"></tm-skill-tree>
+          <tm-skill-tree [editMode]="false" [skill]="skills.piloting"
+            [mechwarrior]="mechwarrior"></tm-skill-tree>
+          <tm-skill-tree [editMode]="false" [skill]="skills.guts"
+            [mechwarrior]="mechwarrior"></tm-skill-tree>
+          <tm-skill-tree [editMode]="false" [skill]="skills.tactics"
+            [mechwarrior]="mechwarrior"></tm-skill-tree>
         </div>
       </div>
     </div>
@@ -54,9 +57,15 @@ export class TMMechwarriorListItemComponent implements OnInit {
 
   @Input() skills: any;
 
-  @Output() updateMechwarrior: EventEmitter<Mechwarrior> = new EventEmitter<Mechwarrior>();
+  @Output()
+  updateMechwarrior: EventEmitter<Mechwarrior> = new EventEmitter<
+    Mechwarrior
+  >();
 
-  @Output() deleteMechwarrior: EventEmitter<Mechwarrior> = new EventEmitter<Mechwarrior>();
+  @Output()
+  deleteMechwarrior: EventEmitter<Mechwarrior> = new EventEmitter<
+    Mechwarrior
+  >();
 
   editing = false;
 
@@ -64,6 +73,14 @@ export class TMMechwarriorListItemComponent implements OnInit {
 
   ngOnInit() {
     console.log(this.skills);
+  }
+
+  onUpdateSkill({ skill, value }) {
+    const mechwarrior = Object.assign({}, this.mechwarrior);
+    if (mechwarrior.stats[skill]) {
+      mechwarrior.stats[skill] = value;
+    }
+    this.updateMechwarrior.emit(this.mechwarrior);
   }
 
   onEdit() {

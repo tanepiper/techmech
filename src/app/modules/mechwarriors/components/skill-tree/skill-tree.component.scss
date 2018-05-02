@@ -3,16 +3,16 @@
   border-radius: 1vh;
   margin: 0 0 2vh;
   padding: 1vh;
-
+  font-size: 2vh;
 }
 
 .skill {
   background: rgb(207, 204, 204);
   border: 1px solid #999;
   border-radius: 1vh 0.5vh;
-  width: 3.5vh;
-  height: 3.5vh;
-  font-size: 0.7vh;
+  width: 10vh;
+  height: 6vh;
+  font-size: 2vh;
   text-align: center;
 
   &:hover {
@@ -23,5 +23,16 @@
   &.active {
     background: darkkhaki;
     border: 1px solid darkolivegreen;
+  }
+}
+
+::ng-deep .tooltip-inner {
+
+  color: #000;
+  background-color: #fff;
+
+  .card {
+    font-size: 1.75vh;
+    text-align: center;
   }
 }
