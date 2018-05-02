@@ -14,7 +14,7 @@ import { debounceTime, startWith, takeUntil } from 'rxjs/operators';
 
     <form novalidate [formGroup]="headerFormGroup">
       <div class="input-group">
-        <input type="text" class="form-control form-control-sm" placeholder="Search Lances" formControlName="searchQuery">
+        <input type="text" class="form-control form-control-sm" placeholder="Search Mechwarriors" formControlName="searchQuery">
         <span class="input-group-append">
           <span class="input-group-text"><span class="fe fe-search"></span></span>
         </span>

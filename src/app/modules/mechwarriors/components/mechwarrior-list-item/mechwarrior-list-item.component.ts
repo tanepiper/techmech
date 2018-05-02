@@ -34,18 +34,26 @@ import { Mechwarrior, SkillLevels } from '../../models/mechwarriors';
       </div>
 
       <div class="card-body">
+        <div class="row">
+          <div class="col"><strong>First Skill:</strong> {{mechwarrior?.skills?.first}}</div>
+          <div class="col"><strong>Second Skill:</strong> {{mechwarrior?.skills?.second}}</div>
+          <div class="col"><strong>Third Skill:</strong> {{mechwarrior?.skills?.third}}</div>
+        </div>
+      </div>
+
+      <div class="card-body">
         <div class="container">
           <div class="row">
             <h3>Skills</h3>
           </div>
           <tm-skill-tree [editMode]="false" [skill]="skills.gunnery"
-            [mechwarrior]="mechwarrior"></tm-skill-tree>
+            [value]="mechwarrior?.stats?.gunnery"></tm-skill-tree>
           <tm-skill-tree [editMode]="false" [skill]="skills.piloting"
-            [mechwarrior]="mechwarrior"></tm-skill-tree>
+            [value]="mechwarrior?.stats?.piloting"></tm-skill-tree>
           <tm-skill-tree [editMode]="false" [skill]="skills.guts"
-            [mechwarrior]="mechwarrior"></tm-skill-tree>
+            [value]="mechwarrior?.stats?.guts"></tm-skill-tree>
           <tm-skill-tree [editMode]="false" [skill]="skills.tactics"
-            [mechwarrior]="mechwarrior"></tm-skill-tree>
+            [value]="mechwarrior?.stats?.tactics"></tm-skill-tree>
         </div>
       </div>
     </div>
@@ -72,7 +80,9 @@ export class TMMechwarriorListItemComponent implements OnInit {
   constructor() {}
 
   ngOnInit() {
-    console.log(this.skills);
+    if (!this.mechwarrior.name) {
+      this.editing = true;
+    }
   }
 
   onUpdateSkill({ skill, value }) {

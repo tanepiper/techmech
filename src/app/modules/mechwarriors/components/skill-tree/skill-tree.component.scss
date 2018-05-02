@@ -6,33 +6,14 @@
   font-size: 2vh;
 }
 
-.skill {
-  background: rgb(207, 204, 204);
-  border: 1px solid #999;
-  border-radius: 1vh 0.5vh;
-  width: 10vh;
-  height: 6vh;
-  font-size: 2vh;
-  text-align: center;
-
-  &:hover {
-    background: darkkhaki;
-    border: 1px solid darkolivegreen;
-  }
-
-  &.active {
-    background: darkkhaki;
-    border: 1px solid darkolivegreen;
-  }
-}
-
 ::ng-deep .tooltip-inner {
 
   color: #000;
   background-color: #fff;
 
   .card {
-    font-size: 1.75vh;
+    font-size: 1.0vh;
     text-align: center;
+    min-width: 30vh;
   }
 }

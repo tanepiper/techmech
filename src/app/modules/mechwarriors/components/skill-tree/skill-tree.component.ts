@@ -3,7 +3,8 @@ import {
   Input,
   Output,
   EventEmitter,
-  forwardRef
+  forwardRef,
+  ChangeDetectionStrategy
 } from '@angular/core';
 import { ControlValueAccessor, NG_VALUE_ACCESSOR } from '@angular/forms';
 import { SkillLevels, Mechwarrior } from '../../models/mechwarriors';
@@ -16,18 +17,21 @@ const SKILL_VALUE_ACCESSOR = {
 
 @Component({
   selector: 'tm-skill-tree',
+  changeDetection: ChangeDetectionStrategy.OnPush,
   providers: [SKILL_VALUE_ACCESSOR],
   styleUrls: ['skill-tree.component.scss'],
   template: `
-    <div class="skill-tree">
-      <h4>{{skill.name}}</h4>
-      <h3>Skills Total XP: {{skillXPTotal(skill)}} / 28,400</h3>
-      <div class="row card-body">
-        <ul class="list-inline mb-0 mt-2">
-          <li *ngFor="let level of skill.levels | keysOf; let i = index" class="skill list-inline-item"
-            [ngbTooltip]="tipContent" container=".skill-tree" [ngClass]="{'active': isActive(i, level)}"
-            (click)="onClick(i)"
-            >
+    <div class="card">
+      <div class="card-header">
+        <h3 class="card-title">{{skill.name}}</h3>
+        <div class="card-options">
+        Skills Total XP: {{skillXPTotal(skill)}} / 28,400
+        </div>
+      </div>
+      <div class="card-body">
+        <div class="btn-group" role="group">
+          <button *ngFor="let level of skill.levels | keysOf; let i = index" class="skill btn btn-default" [ngbTooltip]="tipContent"
+            container=".skill-tree" [ngClass]="{'btn-info': isActive(i, level)}" (click)="onClick($event, i)">{{level}}
             <ng-template #tipContent>
               <div class="card">
                 <div class="card-header">
@@ -36,14 +40,12 @@ const SKILL_VALUE_ACCESSOR = {
                 <div class="card-body">
                   <p><strong>Required XP:</strong> {{skill.levels[level].XP}}</p>
                   <p><strong>Bonus:</strong> {{skill.levels[level].bonus}}</p>
-                  <p><strong>Skills</strong>
-                  <p *ngFor="let skill of skill.levels[level].skills">{{skill.name}}: {{skill.description}}</p>
+                  <p *ngFor="let skill of skill.levels[level].skills"><strong>{{skill.name}}:</strong> {{skill.description}}</p>
                 </div>
               </div>
             </ng-template>
-            <a>{{level}} <i class="fa fa-square"></i></a>
-          </li>
-      </ul>
+          </button>
+        </div>
       </div>
     </div>
   `
@@ -53,7 +55,7 @@ export class TMSkillTreeComponent implements ControlValueAccessor {
   @Input() mechwarrior: Mechwarrior;
   @Input() editMode: boolean;
 
-  value: number;
+  @Input() value: number;
 
   private onTouch: Function;
   private onModelChange: Function;
@@ -72,19 +74,19 @@ export class TMSkillTreeComponent implements ControlValueAccessor {
     this.onTouch = fn;
   }
 
-  onClick(index) {
+  onClick(event, index) {
+    event.preventDefault();
     if (this.editMode) {
       const skill = this.skill.name.toLowerCase();
       this.value = index + 1;
       this.onModelChange(this.value);
     }
-    this.onTouch();
+    return this.onTouch && this.onTouch();
   }
 
   isActive(index, level) {
-    const val = this.mechwarrior.stats[this.skill.name.toLowerCase()];
-    if (index <= Math.ceil(val)) {
-      const check = val - index;
+    if (index <= Math.ceil(this.value)) {
+      const check = this.value - index;
       if (check >= 1) {
         return true;
       }
@@ -93,16 +95,12 @@ export class TMSkillTreeComponent implements ControlValueAccessor {
   }
 
   skillXPTotal(skill) {
-    const val =
-      skill && skill.name
-        ? this.mechwarrior.stats[skill.name.toLowerCase()]
-        : 0;
-    const xp = (
-      Object.keys((skill && skill.levels) || []).slice(0, val) || []
+    console.log(skill);
+    return (
+      Object.keys((skill && skill.levels) || []).slice(0, this.value) || []
     ).reduce((previous: number, next: any) => {
       const result = previous + skill.levels[next].XP;
       return result;
     }, 0);
-    return xp;
   }
 }

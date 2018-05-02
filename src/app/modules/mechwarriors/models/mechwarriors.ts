@@ -9,7 +9,11 @@ export interface Mechwarrior {
     guts: number;
     tactics: number;
   };
-  skills: string[];
+  skills: {
+    first: string;
+    second: string;
+    third: string;
+  };
 }
 
 export interface Skill {

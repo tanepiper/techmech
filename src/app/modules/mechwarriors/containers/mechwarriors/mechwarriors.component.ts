@@ -135,7 +135,11 @@ export class TMMechwarriorsComponent implements OnInit {
         guts: 4,
         tactics: 4
       },
-      skills: []
+      skills: {
+        first: '',
+        second: '',
+        third: ''
+      }
     });
   }
 
