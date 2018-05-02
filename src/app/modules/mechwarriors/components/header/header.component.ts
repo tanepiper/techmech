@@ -4,13 +4,13 @@ import { Subject } from 'rxjs/Subject';
 import { debounceTime, startWith, takeUntil } from 'rxjs/operators';
 
 @Component({
-  selector: 'tm-lance-manager-header',
+  selector: 'tm-mechwarriors-header',
   styleUrls: ['header.component.scss'],
   template: `
   <div class="card-header">
-  <h2 class="card-title">Lance Manager</h2>
+  <h2 class="card-title">Mechwarriors Manager</h2>
   <div class="card-options">
-    <button class="btn btn-primary btn-sm" (click)="onNewLance($event)">Add New Lance</button>
+    <button class="btn btn-primary btn-sm" (click)="onNewMechwarrior($event)">Add New Mechwarrior</button>
 
     <form novalidate [formGroup]="headerFormGroup">
       <div class="input-group">
@@ -24,8 +24,8 @@ import { debounceTime, startWith, takeUntil } from 'rxjs/operators';
 </div>
   `
 })
-export class TmLanceManagerHeaderComponent implements OnInit, OnDestroy {
-  @Output() newLance: EventEmitter<MouseEvent> = new EventEmitter<MouseEvent>();
+export class TmMechwarriorsHeaderComponent implements OnInit, OnDestroy {
+  @Output() newMechWarrior: EventEmitter<MouseEvent> = new EventEmitter<MouseEvent>();
 
   @Output() updateControls: EventEmitter<object> = new EventEmitter<object>();
 
@@ -52,7 +52,7 @@ export class TmLanceManagerHeaderComponent implements OnInit, OnDestroy {
     this.cleanup$.complete();
   }
 
-  onNewLance(event) {
-    this.newLance.emit(event);
+  onNewMechwarrior(event) {
+    this.newMechWarrior.emit(event);
   }
 }
