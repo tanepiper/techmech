@@ -1,6 +1,8 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, OnDestroy } from '@angular/core';
 import { Observable } from 'rxjs/Observable';
 import { Store, select } from '@ngrx/store';
+
+import { FormBuilder, FormGroup } from '@angular/forms';
 
 import { SettingsService } from '../../../settings/services/settings.service';
 import { SettingsGroup } from '../../../settings/models/setting';
@@ -20,16 +22,14 @@ import { selectAllLances } from '../../store';
   template: `
   <div class="row">
     <div class="col">
-      <form class="card">
-      <tm-lance-manager-header (newLance)="onNewLance($event)"></tm-lance-manager-header>
-
-        <div class="card-body">
-          <ul class="list-group">
-            <li class="list-group-item" *ngFor="let lance of displayLances; let i = index">
-            <tm-lance-list-item [lance]="lance" (deleteLance)="onDeleteLance($event)"></tm-lance-list-item>
-          </ul>
-        </div>
-      </form>
+      <tm-lance-manager-header (newLance)="onNewLance($event)" (updateControls)="onUpdateControls($event)"></tm-lance-manager-header>
+      <div class="card-body">
+        <ul class="list-group">
+          <li class="list-group-item" *ngFor="let lance of displayLances; let i = index">
+            <tm-lance-list-item [lance]="lance" (deleteLance)="onDeleteLance($event)"
+              (updateLance)="onUpdateLance($event)"></tm-lance-list-item>
+        </ul>
+      </div>
     </div>
   </div>
   `
@@ -41,18 +41,56 @@ export class TMLanceManagerComponent implements OnInit {
 
   displayLances: Lance[];
 
+  lanceForm: FormGroup;
+
   constructor(
     private settingsService: SettingsService,
     private lanceService: LanceManagerService,
-    private store: Store<Lance[]>
+    private store: Store<Lance[]>,
+    private fb: FormBuilder
   ) {
     this.settings$ = this.settingsService.getSettings();
+    this.displayLances = [];
   }
 
   ngOnInit() {
     this.lances$ = this.lanceService.getAllLances();
-    this.lances$.subscribe((data: any) => (this.displayLances = Object.keys(data.lances.entities).map(i => data.lances.entities[i])));
-    console.log(this.displayLances);
+    const getData = this.lances$.subscribe(
+      (data: any) => (this.displayLances = Object.keys(data.lances.entities).map(i => data.lances.entities[i])),
+      error => {
+        console.log(error);
+      },
+      () => getData.unsubsribe()
+    );
+  }
+
+  onSubmit() {
+    this.lanceService.updateLance(this.lanceForm.value);
+  }
+
+  onUpdateControls({ searchQuery }) {
+    let thisIsBad;
+    console.log(searchQuery);
+    if (searchQuery === '') {
+      thisIsBad = this.lances$.subscribe(
+        (data: any) => (this.displayLances = Object.keys(data.lances.entities).map(i => data.lances.entities[i])),
+        error => {
+          console.log(error);
+        },
+        () => thisIsBad.unsubsribe()
+      );
+    } else {
+      thisIsBad = this.lances$.subscribe(
+        (data: any) =>
+          (this.displayLances = Object.keys(data.lances.entities)
+            .map(i => data.lances.entities[i])
+            .filter(lance => lance.name.toLowerCase().includes(searchQuery.toLowerCase()))),
+        error => {
+          console.log(error);
+        },
+        () => thisIsBad.unsubsribe()
+      );
+    }
   }
 
   onNewLance(event) {
@@ -62,17 +100,18 @@ export class TMLanceManagerComponent implements OnInit {
       name: 'Techmech Raptors',
       description: 'A battle hardend lance that dishes out gunishment',
       mechs: [],
-      mechwarriors: []
+      mechwarriors: [{
+        name: 'Titus',
+        stats: {}
+      }]
     });
   }
 
-  onDeleteLance(lance) {
-    // event.preventDefault();
-    console.log(lance);
-    this.lanceService.deleteLance(lance);
+  onUpdateLance(lance) {
+    this.lanceService.updateLance(lance);
   }
 
-  onUpdate(setting) {
-    // this.settingsService.updateSetting(setting);
+  onDeleteLance(lance) {
+    this.lanceService.deleteLance(lance);
   }
 }

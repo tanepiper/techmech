@@ -24,9 +24,9 @@ export class LanceManagerService {
     this.store.dispatch(new lanceManagerStore.AddLance(lance));
   }
 
-  updateLance(updatedLance: any, updatedIndex): void {
+  updateLance(updatedLance: any): void {
     this.lanceGroups = this.lanceGroups.map((lance, index) => {
-      if (index === updatedIndex) {
+      if (lance.id === updatedLance.id) {
         lance = updatedLance;
       }
       return lance;
