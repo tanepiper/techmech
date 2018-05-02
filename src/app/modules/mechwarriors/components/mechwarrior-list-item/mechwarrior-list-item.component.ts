@@ -1,6 +1,5 @@
-import { Component, OnInit, Input, Output, EventEmitter } from '@angular/core';
-import { Mechwarrior } from '../../models/mechwarriors';
-import { FormBuilder, FormGroup } from '@angular/forms';
+import { Component, EventEmitter, Input, Output, OnInit } from '@angular/core';
+import { Mechwarrior, SkillLevels } from '../../models/mechwarriors';
 
 @Component({
   selector: 'tm-mechwarrior-list-item',
@@ -40,18 +39,20 @@ import { FormBuilder, FormGroup } from '@angular/forms';
           <div class="row">
             <h3>Skills</h3>
           </div>
-
-          <div class="row">
-
-          </div>
+          <tm-skill-tree [skill]="skills.gunnery" [mechwarrior]="mechwarrior"></tm-skill-tree>
+          <tm-skill-tree [skill]="skills.piloting" [mechwarrior]="mechwarrior"></tm-skill-tree>
+          <tm-skill-tree [skill]="skills.guts" [mechwarrior]="mechwarrior"></tm-skill-tree>
+          <tm-skill-tree [skill]="skills.tactics" [mechwarrior]="mechwarrior"></tm-skill-tree>
         </div>
       </div>
     </div>
   </div>
   `
 })
-export class TMMechwarriorListItemComponent {
+export class TMMechwarriorListItemComponent implements OnInit {
   @Input() mechwarrior: Mechwarrior;
+
+  @Input() skills: any;
 
   @Output() updateMechwarrior: EventEmitter<Mechwarrior> = new EventEmitter<Mechwarrior>();
 
@@ -60,6 +61,10 @@ export class TMMechwarriorListItemComponent {
   editing = false;
 
   constructor() {}
+
+  ngOnInit() {
+    console.log(this.skills);
+  }
 
   onEdit() {
     this.editing = !this.editing;

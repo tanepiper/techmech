@@ -1,0 +1,27 @@
+.skill-tree {
+  border: 1px solid #999;
+  border-radius: 1vh;
+  margin: 0 0 2vh;
+  padding: 1vh;
+
+}
+
+.skill {
+  background: rgb(207, 204, 204);
+  border: 1px solid #999;
+  border-radius: 1vh 0.5vh;
+  width: 3.5vh;
+  height: 3.5vh;
+  font-size: 0.7vh;
+  text-align: center;
+
+  &:hover {
+    background: darkkhaki;
+    border: 1px solid darkolivegreen;
+  }
+
+  &.active {
+    background: darkkhaki;
+    border: 1px solid darkolivegreen;
+  }
+}

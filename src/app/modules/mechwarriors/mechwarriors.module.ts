@@ -1,30 +1,38 @@
-import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
-import { EffectsModule } from '@ngrx/effects';
-import { StoreModule } from '@ngrx/store';
+import { NgModule } from '@angular/core';
+import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
 import { ReactiveFormsModule } from '@angular/forms';
-
-// Containers
-import { TMMechwarriorsComponent } from './containers/mechwarriors/mechwarriors.component';
-
+import { StoreModule } from '@ngrx/store';
 // Components
 import { TmMechwarriorsHeaderComponent } from './components/header/header.component';
-import { TMMechwarriorListItemComponent } from './components/mechwarrior-list-item/mechwarrior-list-item.component';
 import { TMMechwarriorFormComponent } from './components/mechwarrior-form/mechwarrior-form.component';
-
+import { TMMechwarriorListItemComponent } from './components/mechwarrior-list-item/mechwarrior-list-item.component';
+import { TMSkillTreeComponent } from './components/skill-tree/skill-tree.component';
+// Containers
+import { TMMechwarriorsComponent } from './containers/mechwarriors/mechwarriors.component';
 // Services
 import { MechwarriorsService } from './services/mechwarriors.service';
-
+import { TMSkillsService } from './services/skills.service';
 import * as MechwarriorsStore from './store';
 
+// Pipes
+import { KeysOfPipe } from './pipes/keys.pipe';
+
 @NgModule({
-  imports: [CommonModule, ReactiveFormsModule, StoreModule.forFeature('mechwarriors', MechwarriorsStore.reducers)],
+  imports: [
+    CommonModule,
+    ReactiveFormsModule,
+    NgbModule,
+    StoreModule.forFeature('mechwarriors', MechwarriorsStore.reducers)
+  ],
   declarations: [
     TMMechwarriorsComponent,
     TmMechwarriorsHeaderComponent,
     TMMechwarriorListItemComponent,
-    TMMechwarriorFormComponent
+    TMMechwarriorFormComponent,
+    TMSkillTreeComponent,
+    KeysOfPipe
   ],
-  providers: [MechwarriorsService]
+  providers: [MechwarriorsService, TMSkillsService]
 })
 export class TmMechwarriorsModule {}

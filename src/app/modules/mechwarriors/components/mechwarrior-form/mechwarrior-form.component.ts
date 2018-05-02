@@ -36,7 +36,7 @@ export class TMMechwarriorFormComponent implements OnInit {
       description: this.mechwarrior.description,
       stats: this.fb.group({
         gunnery: this.mechwarrior.stats.gunnery,
-        pilot: this.mechwarrior.stats.pilot,
+        piloting: this.mechwarrior.stats.piloting,
         guts: this.mechwarrior.stats.guts,
         tactics: this.mechwarrior.stats.tactics,
       })
