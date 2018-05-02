@@ -95,7 +95,6 @@ export class TMSkillTreeComponent implements ControlValueAccessor {
   }
 
   skillXPTotal(skill) {
-    console.log(skill);
     return (
       Object.keys((skill && skill.levels) || []).slice(0, this.value) || []
     ).reduce((previous: number, next: any) => {

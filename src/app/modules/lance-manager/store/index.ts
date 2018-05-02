@@ -7,7 +7,6 @@ export const reducers: ActionReducerMap<any> = {
 };
 
 export const selectLanceManagerState = createFeatureSelector<lanceManagerReducer.State>('lances');
-console.dir(selectLanceManagerState);
 
 export const { selectAll: selectAllLances } = lanceManagerReducer.lanceManagerAdapter.getSelectors(
   selectLanceManagerState

@@ -1,9 +1,17 @@
-import { Component, OnInit, Input, Output, EventEmitter } from '@angular/core';
+import {
+  Component,
+  OnInit,
+  Input,
+  Output,
+  EventEmitter,
+  ChangeDetectionStrategy
+} from '@angular/core';
 import { FormGroup, FormBuilder } from '@angular/forms';
 import { Mechwarrior } from '../../models/mechwarriors';
 
 @Component({
   selector: 'tm-mechwarrior-form',
+  changeDetection: ChangeDetectionStrategy.OnPush,
   styleUrls: ['mechwarrior-form.component.scss'],
   template: `
   <form novalidate class="form" [formGroup]="mechwarriorForm" (ngSubmit)="onSaveChanges($event)">
@@ -41,18 +49,21 @@ import { Mechwarrior } from '../../models/mechwarriors';
     <div class="form-group">
       <label class="form-label">First</label>
       <select class="form-control" formControlName="first">
+        <option value="">Select First Skill</option>
         <option *ngFor="let skill of primarySkills" [value]="skill">{{skill}}</option>
       </select>
     </div>
     <div class="form-group">
       <label class="form-label">Second</label>
       <select class="form-control" formControlName="second">
+      <option value="">Select Second Skill</option>
         <option *ngFor="let skill of primarySkills" [value]="skill">{{skill}}</option>
       </select>
     </div>
     <div class="form-group">
       <label class="form-label">Third</label>
       <select class="form-control" formControlName="third">
+       <option value="">Select Third Skill</option>
         <option *ngFor="let skill of secondarySkills" [value]="skill">{{skill}}</option>
       </select>
     </div>
@@ -76,10 +87,23 @@ export class TMMechwarriorFormComponent implements OnInit {
     { value: 'ply', label: 'Player' }
   ];
 
-  protected primarySkills = ['Multi-target', 'Evasive Movement', 'Bulwark', 'Sensor Lock'];
-  protected secondarySkills = ['Breaching Shot', 'Ace Pilot', 'Juggernaut', 'Master Tactician'];
+  protected primarySkills = [
+    'Multi-target',
+    'Evasive Movement',
+    'Bulwark',
+    'Sensor Lock'
+  ];
+  protected secondarySkills = [
+    'Breaching Shot',
+    'Ace Pilot',
+    'Juggernaut',
+    'Master Tactician'
+  ];
 
   constructor(private fb: FormBuilder) {}
+
+  firstLevelSkillsDisabled = false;
+  secondLevelSkillsDisabled = false;
 
   ngOnInit() {
     this.mechwarriorForm = this.fb.group({
@@ -94,11 +118,37 @@ export class TMMechwarriorFormComponent implements OnInit {
         tactics: this.mechwarrior.stats.tactics
       }),
       skills: this.fb.group({
-        first: this.mechwarrior.skills.first,
-        second: this.mechwarrior.skills.second,
-        third: this.mechwarrior.skills.third
+        first: [{ value: (this.mechwarrior.skills && this.mechwarrior.skills.first || ''), disabled: this.firstLevelSkillsDisabled }],
+        second: [{ value: (this.mechwarrior.skills && this.mechwarrior.skills.second || ''), disabled: this.firstLevelSkillsDisabled }],
+        third: [{ value: (this.mechwarrior.skills && this.mechwarrior.skills.third || ''), disabled: this.secondLevelSkillsDisabled }],
       })
     });
+
+    const query$ = this.mechwarriorForm.valueChanges.subscribe(form => {
+      const result = Object.keys(this.mechwarriorForm.value.stats).reduce(
+        (prev, next) => {
+          if (this.mechwarriorForm.value.stats[next] > prev) {
+            return this.mechwarriorForm.value.stats[next];
+          }
+          return prev;
+        },
+        0
+      );
+      // this.mechwarriorForm.controls.skills['first'].disable();
+      // this.mechwarriorForm.controls.skills['second'].disable();
+      // this.mechwarriorForm.controls.skills['third'].disable();
+      this.firstLevelSkillsDisabled = true;
+      this.secondLevelSkillsDisabled = true;
+      if (result >= 5) {
+        // this.mechwarriorForm.controls.skills['first'].enable();
+        // this.mechwarriorForm.controls.skills['second'].enable();
+        this.firstLevelSkillsDisabled = false;
+      }
+      if (result >= 8) {
+        // this.mechwarriorForm.controls.skills['third'].enable();
+        this.secondLevelSkillsDisabled = false;
+      }
+    }); // , error => console.log(error), () => query$.unsubsribe());
   }
 
   onSaveChanges(event) {

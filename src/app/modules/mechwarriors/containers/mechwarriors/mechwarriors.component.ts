@@ -82,7 +82,6 @@ export class TMMechwarriorsComponent implements OnInit {
 
     const getSkills = this.skills$.subscribe(
       (data: any) => {
-        console.log('data', data);
         this.displaySkills = data;
       },
       error => {
@@ -98,7 +97,6 @@ export class TMMechwarriorsComponent implements OnInit {
 
   onUpdateControls({ searchQuery }) {
     let thisIsBad;
-    console.log(searchQuery);
     if (searchQuery === '') {
       thisIsBad = this.mechwarriors$.subscribe(
         (data: any) =>

@@ -7,7 +7,6 @@ export const reducers: ActionReducerMap<any> = {
 };
 
 export const selectMechwarriorsState = createFeatureSelector<MechwarriorsReducer.State>('mechwarriors');
-console.dir(selectMechwarriorsState);
 
 export const { selectAll: selectAllMechwarriors } = MechwarriorsReducer.MechwarriorsAdapter.getSelectors(
   selectMechwarriorsState
