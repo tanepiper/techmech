@@ -15,61 +15,71 @@ import { Mechwarrior } from '../../models/mechwarriors';
   styleUrls: ['mechwarrior-form.component.scss'],
   template: `
   <form novalidate class="form" [formGroup]="mechwarriorForm" (ngSubmit)="onSaveChanges($event)">
-  <div class="form-group">
-    <label class="form-label">Mechwarrior Name</label>
-    <input type="text" class="form-control" placeholder="Mechwarrior Name" formControlName="name" />
-  </div>
-  <div class="form-group">
-    <label class="form-label">Mechwarrior Description</label>
-    <textarea class="form-control" placeholder="Mechwarrior Description" formControlName="description"></textarea>
-  </div>
-  <div class="form-group">
-    <label class="form-label">Mechwarrior Type</label>
-    <select class="form-control" formControlName="type">
-      <option *ngFor="let player of playerTypes" [value]="player.label">{{player.label}}</option>
-    </select>
-  </div>
-  <div formGroupName="stats">
     <div class="form-group">
-      <tm-skill-tree [editMode]="true" [skill]="skills.gunnery" [mechwarrior]="mechwarrior" formControlName="gunnery"></tm-skill-tree>
+      <label class="form-label">Mechwarrior Name</label>
+      <input type="text" class="form-control" placeholder="Mechwarrior Name" formControlName="name" />
     </div>
     <div class="form-group">
-      <tm-skill-tree [editMode]="true" [skill]="skills.piloting" [mechwarrior]="mechwarrior" formControlName="piloting"></tm-skill-tree>
+      <label class="form-label">Mechwarrior Description</label>
+      <textarea class="form-control" placeholder="Mechwarrior Description" formControlName="description"></textarea>
     </div>
     <div class="form-group">
-      <tm-skill-tree [editMode]="true" [skill]="skills.guts"
-        [mechwarrior]="mechwarrior" formControlName="guts"></tm-skill-tree>
-    </div>
-    <div class="form-group">
-      <tm-skill-tree [editMode]="true" [skill]="skills.tactics"
-        [mechwarrior]="mechwarrior" formControlName="tactics"></tm-skill-tree>
-    </div>
-  </div>
-  <div formGroupName="skills">
-    <div class="form-group">
-      <label class="form-label">First</label>
-      <select class="form-control" formControlName="first">
-        <option value="">Select First Skill</option>
-        <option *ngFor="let skill of primarySkills" [value]="skill">{{skill}}</option>
+      <label class="form-label">Mechwarrior Type</label>
+      <select class="form-control" formControlName="type">
+        <option *ngFor="let player of playerTypes" [value]="player.label">{{player.label}}</option>
       </select>
     </div>
-    <div class="form-group">
-      <label class="form-label">Second</label>
-      <select class="form-control" formControlName="second">
-      <option value="">Select Second Skill</option>
-        <option *ngFor="let skill of primarySkills" [value]="skill">{{skill}}</option>
-      </select>
+    <div formGroupName="stats" class="row">
+      <div class="col">
+        <div class="form-group">
+          <tm-skill-tree [editMode]="true" [skill]="skills.gunnery" formControlName="gunnery"></tm-skill-tree>
+        </div>
+      </div>
+      <div class="col">
+        <div class="form-group">
+          <tm-skill-tree [editMode]="true" [skill]="skills.piloting" formControlName="piloting"></tm-skill-tree>
+        </div>
+      </div>
     </div>
-    <div class="form-group">
-      <label class="form-label">Third</label>
-      <select class="form-control" formControlName="third">
-       <option value="">Select Third Skill</option>
-        <option *ngFor="let skill of secondarySkills" [value]="skill">{{skill}}</option>
-      </select>
+    <div formGroupName="stats" class="row">
+      <div class="col">
+        <div class="form-group">
+          <tm-skill-tree [editMode]="true" [skill]="skills.guts"
+            formControlName="guts"></tm-skill-tree>
+        </div>
+      </div>
+      <div class="col">
+        <div class="form-group">
+          <tm-skill-tree [editMode]="true" [skill]="skills.tactics"
+            formControlName="tactics"></tm-skill-tree>
+        </div>
+      </div>
     </div>
-  </div>
-  <button type="submit" class="btn btn-default">Save Changes</button>
-</form>
+    <div formGroupName="skills">
+      <div class="form-group">
+        <label class="form-label">First</label>
+        <select class="form-control" formControlName="first">
+          <option value="">Select First Skill</option>
+          <option *ngFor="let skill of primarySkills" [value]="skill">{{skill}}</option>
+        </select>
+      </div>
+      <div class="form-group">
+        <label class="form-label">Second</label>
+        <select class="form-control" formControlName="second">
+        <option value="">Select Second Skill</option>
+          <option *ngFor="let skill of primarySkills" [value]="skill">{{skill}}</option>
+        </select>
+      </div>
+      <div class="form-group">
+        <label class="form-label">Third</label>
+        <select class="form-control" formControlName="third">
+        <option value="">Select Third Skill</option>
+          <option *ngFor="let skill of secondarySkills" [value]="skill">{{skill}}</option>
+        </select>
+      </div>
+    </div>
+    <button type="submit" class="btn btn-default">Save Changes</button>
+  </form>
   `
 })
 export class TMMechwarriorFormComponent implements OnInit {

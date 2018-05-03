@@ -1,6 +1,7 @@
 import { Component, OnInit, Input, Output, EventEmitter } from '@angular/core';
 import { Lance } from '../../models/lance-manager';
 import { FormBuilder, FormGroup } from '@angular/forms';
+import { Mechwarrior } from '../../../mechwarriors/models/mechwarriors';
 
 @Component({
   selector: 'tm-lance-list-item',
@@ -44,6 +45,9 @@ import { FormBuilder, FormGroup } from '@angular/forms';
 
           <div class="row">
             <div class="col">
+              <select>
+                <option *ngFor="let mechwarrior of mechwarriors">{{mechwarrior.name}}</option>
+              </select>
               <div *ngIf="lance?.mechwarriors[0]">
                 <div class="card">
                   <h3 class="card-header">{{lance.mechwarriors[0].name}}</h3>
@@ -156,13 +160,17 @@ import { FormBuilder, FormGroup } from '@angular/forms';
 export class TMLanceListItemComponent {
   @Input() lance: Lance;
 
+  @Input() mechwarriors: Mechwarrior[];
+
   @Output() updateLance: EventEmitter<Lance> = new EventEmitter<Lance>();
 
   @Output() deleteLance: EventEmitter<Lance> = new EventEmitter<Lance>();
 
   editing = false;
 
-  constructor() {}
+  constructor() {
+    console.log(this.mechwarriors);
+  }
 
   onEdit() {
     this.editing = !this.editing;

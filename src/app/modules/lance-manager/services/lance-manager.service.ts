@@ -42,7 +42,6 @@ export class LanceManagerService {
   getAllLances(): Observable<Lance[]> {
     return this.store.pipe(
       select('lances'),
-      // tap(data => console.log(data))
     );
   }
 }

@@ -29,7 +29,7 @@ const SKILL_VALUE_ACCESSOR = {
         </div>
       </div>
       <div class="card-body">
-        <div class="btn-group" role="group">
+        <div class="btn-group flex-wrap" role="group">
           <button *ngFor="let level of skill.levels | keysOf; let i = index" class="skill btn btn-default" [ngbTooltip]="tipContent"
             container=".skill-tree" [ngClass]="{'btn-info': isActive(i, level)}" (click)="onClick($event, i)">{{level}}
             <ng-template #tipContent>
@@ -52,7 +52,6 @@ const SKILL_VALUE_ACCESSOR = {
 })
 export class TMSkillTreeComponent implements ControlValueAccessor {
   @Input() skill: any;
-  @Input() mechwarrior: Mechwarrior;
   @Input() editMode: boolean;
 
   @Input() value: number;

@@ -17,13 +17,15 @@ import * as MechwarriorsStore from './store';
 
 // Pipes
 import { KeysOfPipe } from './pipes/keys.pipe';
+import { EffectsModule } from '@ngrx/effects';
 
 @NgModule({
   imports: [
     CommonModule,
     ReactiveFormsModule,
     NgbModule,
-    StoreModule.forFeature('mechwarriors', MechwarriorsStore.reducers)
+    StoreModule.forFeature('mechwarriors', MechwarriorsStore.reducers),
+    EffectsModule.forFeature(MechwarriorsStore.effects)
   ],
   declarations: [
     TMMechwarriorsComponent,

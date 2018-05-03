@@ -46,14 +46,20 @@ import { Mechwarrior, SkillLevels } from '../../models/mechwarriors';
           <div class="row">
             <h3>Skills</h3>
           </div>
-          <tm-skill-tree [editMode]="false" [skill]="skills.gunnery"
-            [value]="mechwarrior?.stats?.gunnery"></tm-skill-tree>
-          <tm-skill-tree [editMode]="false" [skill]="skills.piloting"
-            [value]="mechwarrior?.stats?.piloting"></tm-skill-tree>
-          <tm-skill-tree [editMode]="false" [skill]="skills.guts"
-            [value]="mechwarrior?.stats?.guts"></tm-skill-tree>
-          <tm-skill-tree [editMode]="false" [skill]="skills.tactics"
-            [value]="mechwarrior?.stats?.tactics"></tm-skill-tree>
+          <div class="row">
+            <div class="col">
+              <tm-skill-tree [editMode]="false" [skill]="skills.gunnery" [value]="mechwarrior?.stats?.gunnery"></tm-skill-tree>
+            </div>
+            <div class="col">
+              <tm-skill-tree [editMode]="false" [skill]="skills.piloting" [value]="mechwarrior?.stats?.piloting"></tm-skill-tree>
+            </div>
+            <div class="col">
+              <tm-skill-tree [editMode]="false" [skill]="skills.guts" [value]="mechwarrior?.stats?.guts"></tm-skill-tree>
+            </div>
+            <div class="col">
+              <tm-skill-tree [editMode]="false" [skill]="skills.tactics" [value]="mechwarrior?.stats?.tactics"></tm-skill-tree>
+            </div>
+          </div>
         </div>
       </div>
     </div>

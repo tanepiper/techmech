@@ -11,10 +11,14 @@ import { Lance } from '../../models/lance-manager';
 
 import * as lanceManagerStore from '../../store';
 import { take } from 'rxjs/operator/take';
-import { tap } from 'rxjs/operators';
+import { tap, switchMap, map } from 'rxjs/operators';
 import { of } from 'rxjs/observable/of';
 
 import { selectAllLances } from '../../store';
+import { Mechwarrior } from '../../../mechwarriors/models/mechwarriors';
+import { Subject } from 'rxjs';
+import { MechwarriorsService } from '../../../mechwarriors/services/mechwarriors.service';
+import { takeUntil } from 'rxjs/operators';
 
 @Component({
   selector: 'tm-lance-manger-container',
@@ -27,41 +31,53 @@ import { selectAllLances } from '../../store';
         <ul class="list-group">
           <li class="list-group-item" *ngFor="let lance of displayLances; let i = index">
             <tm-lance-list-item [lance]="lance" (deleteLance)="onDeleteLance($event)"
-              (updateLance)="onUpdateLance($event)"></tm-lance-list-item>
+              (updateLance)="onUpdateLance($event)" [mechwarriors]="displayMechwarriors"></tm-lance-list-item>
         </ul>
       </div>
     </div>
   </div>
   `
 })
-export class TMLanceManagerComponent implements OnInit {
+export class TMLanceManagerComponent implements OnInit, OnDestroy {
+  destroyed$: Subject<boolean> = new Subject<boolean>();
+
   settings$: Observable<SettingsGroup>;
 
-  lances$: Observable<Lance[]>;
-
   displayLances: Lance[];
+
+  displayMechwarriors: Mechwarrior[];
 
   lanceForm: FormGroup;
 
   constructor(
     private settingsService: SettingsService,
     private lanceService: LanceManagerService,
-    private store: Store<Lance[]>,
+    private mwService: MechwarriorsService,
     private fb: FormBuilder
   ) {
     this.settings$ = this.settingsService.getSettings();
     this.displayLances = [];
+    this.displayMechwarriors = [];
   }
 
   ngOnInit() {
-    this.lances$ = this.lanceService.getAllLances();
-    const getData = this.lances$.subscribe(
-      (data: any) => (this.displayLances = Object.keys(data.lances.entities).map(i => data.lances.entities[i])),
-      error => {
-        console.log(error);
-      },
-      () => getData.unsubsribe()
-    );
+    this.lanceService
+      .getAllLances()
+      .pipe(takeUntil(this.destroyed$))
+      .subscribe((data: any) => {
+        this.displayLances = Object.keys(data.lances.entities).map(i => data.lances.entities[i]);
+      });
+    this.mwService
+      .getAllMechwarriors()
+      .pipe(takeUntil(this.destroyed$))
+      .subscribe((data: any) => {
+        this.displayMechwarriors = Object.keys(data.mechwarriors.entities).map(i => data.mechwarriors.entities[i]);
+      });
+  }
+
+  ngOnDestroy() {
+    this.destroyed$.next(true);
+    this.destroyed$.complete();
   }
 
   onSubmit() {
@@ -69,28 +85,14 @@ export class TMLanceManagerComponent implements OnInit {
   }
 
   onUpdateControls({ searchQuery }) {
-    let thisIsBad;
-    console.log(searchQuery);
-    if (searchQuery === '') {
-      thisIsBad = this.lances$.subscribe(
-        (data: any) => (this.displayLances = Object.keys(data.lances.entities).map(i => data.lances.entities[i])),
-        error => {
-          console.log(error);
-        },
-        () => thisIsBad.unsubsribe()
-      );
-    } else {
-      thisIsBad = this.lances$.subscribe(
-        (data: any) =>
-          (this.displayLances = Object.keys(data.lances.entities)
-            .map(i => data.lances.entities[i])
-            .filter(lance => lance.name.toLowerCase().includes(searchQuery.toLowerCase()))),
-        error => {
-          console.log(error);
-        },
-        () => thisIsBad.unsubsribe()
-      );
-    }
+    this.lanceService
+      .getAllLances()
+      .pipe(takeUntil(this.destroyed$))
+      .subscribe((data: any) => {
+        this.displayLances = Object.keys(data.lances.entities)
+          .map(i => data.lances.entities[i])
+          .filter(lance => lance.name.toLowerCase().includes(searchQuery.toLowerCase()));
+      });
   }
 
   onNewLance(event) {
@@ -100,10 +102,12 @@ export class TMLanceManagerComponent implements OnInit {
       name: 'Techmech Raptors',
       description: 'A battle hardend lance that dishes out gunishment',
       mechs: [],
-      mechwarriors: [{
-        name: 'Titus',
-        stats: {}
-      }]
+      mechwarriors: [
+        {
+          name: 'Titus',
+          stats: {}
+        }
+      ]
     });
   }
 

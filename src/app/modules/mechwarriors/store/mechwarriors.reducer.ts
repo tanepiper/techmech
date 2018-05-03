@@ -16,13 +16,15 @@ export const initialState: State = MechwarriorsAdapter.getInitialState({
 
 export function MechwarriorsReducer(state: State = initialState, action: MechwarriorsActions.MechwarriorActions): State {
   switch (action.type) {
-    case MechwarriorsActions.ADD_ALL_LANCES:
+    case MechwarriorsActions.LOAD_MECHWARRIORS:
+      return state;
+    case MechwarriorsActions.ADD_ALL_MECHWARRIORS:
       return MechwarriorsAdapter.addAll(action.payload, state);
-    case MechwarriorsActions.ADD_LANCE:
+    case MechwarriorsActions.ADD_MECHWARRIOR:
       return MechwarriorsAdapter.addOne(action.payload, state);
-    case MechwarriorsActions.UPDATE_LANCE:
+    case MechwarriorsActions.UPDATE_MECHWARRIOR:
       return MechwarriorsAdapter.updateOne({ id: action.payload.id, changes: action.payload }, state);
-    case MechwarriorsActions.DELETE_LANCE:
+    case MechwarriorsActions.DELETE_MECHWARRIOR:
       return MechwarriorsAdapter.removeOne(action.payload.id, state);
     default:
       return state;

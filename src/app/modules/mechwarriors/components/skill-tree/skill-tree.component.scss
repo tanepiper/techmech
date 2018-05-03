@@ -1,9 +1,10 @@
-.skill-tree {
-  border: 1px solid #999;
-  border-radius: 1vh;
-  margin: 0 0 2vh;
-  padding: 1vh;
-  font-size: 2vh;
+// :host {
+//   display: flex;
+//   width: 50vh;
+// }
+
+.card {
+  width: 30vw;
 }
 
 ::ng-deep .tooltip-inner {
@@ -14,6 +15,6 @@
   .card {
     font-size: 1.0vh;
     text-align: center;
-    min-width: 30vh;
+    min-width: 25vh;
   }
 }

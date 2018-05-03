@@ -12,5 +12,10 @@ export const { selectAll: selectAllMechwarriors } = MechwarriorsReducer.Mechwarr
   selectMechwarriorsState
 );
 
+import { MechwarriorEffects } from './mechwarriors.effects';
+
+export const effects: any[] = [MechwarriorEffects];
+
 export * from './mechwarriors.actions';
 export * from './mechwarriors.reducer';
+export * from './mechwarriors.effects';
