@@ -1,7 +1,7 @@
 import { Injectable } from '@angular/core';
 import { Effect, Actions } from '@ngrx/effects';
 import { map, exhaustMap, catchError } from 'rxjs/operators';
-import { of } from 'rxjs/observable/of';
+import { of } from 'rxjs';
 
 import { MechwarriorsService } from '../services/mechwarriors.service';
 import * as mechwarriorActions from '../store/mechwarriors.actions';
@@ -19,3 +19,6 @@ export class MechwarriorEffects {
     })
   );
 }
+
+
+export const effects: any[] = [MechwarriorEffects];

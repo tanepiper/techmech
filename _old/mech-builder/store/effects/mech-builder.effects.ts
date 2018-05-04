@@ -1,8 +1,7 @@
 import { Injectable } from '@angular/core';
 import { Actions, Effect } from '@ngrx/effects';
 import { Action } from '@ngrx/store';
-import { Observable } from 'rxjs/Observable';
-import { of } from 'rxjs/observable/of';
+import { Observable ,  of } from 'rxjs';
 import { catchError, exhaustMap, map, tap } from 'rxjs/operators';
 import { AppService } from '../../services/app.service';
 import * as mechBuilderActions from '../actions';

@@ -11,11 +11,3 @@ export const selectMechwarriorsState = createFeatureSelector<MechwarriorsReducer
 export const { selectAll: selectAllMechwarriors } = MechwarriorsReducer.MechwarriorsAdapter.getSelectors(
   selectMechwarriorsState
 );
-
-import { MechwarriorEffects } from './mechwarriors.effects';
-
-export const effects: any[] = [MechwarriorEffects];
-
-export * from './mechwarriors.actions';
-export * from './mechwarriors.reducer';
-export * from './mechwarriors.effects';

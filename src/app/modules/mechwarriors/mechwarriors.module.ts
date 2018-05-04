@@ -14,6 +14,7 @@ import { TMMechwarriorsComponent } from './containers/mechwarriors/mechwarriors.
 import { MechwarriorsService } from './services/mechwarriors.service';
 import { TMSkillsService } from './services/skills.service';
 import * as MechwarriorsStore from './store';
+import { effects } from './store/mechwarriors.effects';
 
 // Pipes
 import { KeysOfPipe } from './pipes/keys.pipe';
@@ -25,7 +26,7 @@ import { EffectsModule } from '@ngrx/effects';
     ReactiveFormsModule,
     NgbModule,
     StoreModule.forFeature('mechwarriors', MechwarriorsStore.reducers),
-    EffectsModule.forFeature(MechwarriorsStore.effects)
+    EffectsModule.forFeature(effects)
   ],
   declarations: [
     TMMechwarriorsComponent,

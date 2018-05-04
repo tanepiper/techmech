@@ -1,11 +1,9 @@
 import { Injectable } from '@angular/core';
 import { LocalStorage } from 'ngx-store';
-import { Observable } from 'rxjs/Observable';
-import { of } from 'rxjs/observable/of';
+import { Observable ,  of ,  Subject, BehaviorSubject } from 'rxjs';
 import { Store, select } from '@ngrx/store';
 
 import { Lance } from '../models/lance-manager';
-import { Subject, BehaviorSubject } from 'rxjs';
 
 import * as lanceManagerStore from '../store';
 import { tap } from 'rxjs/operators';

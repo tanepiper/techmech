@@ -1,5 +1,5 @@
 import { Component, OnInit, OnDestroy } from '@angular/core';
-import { Observable } from 'rxjs/Observable';
+import { Observable, of, Subject } from 'rxjs';
 import { Store, select } from '@ngrx/store';
 
 import { FormBuilder, FormGroup } from '@angular/forms';
@@ -11,9 +11,8 @@ import { Mechwarrior, SkillLevels } from '../../models/mechwarriors';
 import { TMSkillsService } from '../../services/skills.service';
 
 import * as MechwarriorsStore from '../../store';
-import { take } from 'rxjs/operator/take';
-import { tap } from 'rxjs/operators';
-import { of } from 'rxjs/observable/of';
+
+import { tap, takeUntil } from 'rxjs/operators';
 
 import { selectAllMechwarriors } from '../../store';
 
@@ -27,9 +26,9 @@ import { selectAllMechwarriors } from '../../store';
         (updateControls)="onUpdateControls($event)"></tm-mechwarriors-header>
       <div class="card-body">
         <ul class="list-group">
-          <li class="list-group-item" *ngFor="let mechwarrior of displayMechwarriors; let i = index">
+          <li class="list-group-item" *ngFor="let mechwarrior of mechwarriors; let i = index">
             <tm-mechwarrior-list-item [mechwarrior]="mechwarrior" (deleteMechwarrior)="onDeleteMechwarrior($event)"
-              (updateMechwarrior)="onUpdateMechwarrior($event)" [skills]="displaySkills"></tm-mechwarrior-list-item>
+              (updateMechwarrior)="onUpdateMechwarrior($event)" [skills]="skills"></tm-mechwarrior-list-item>
         </ul>
       </div>
     </div>
@@ -37,28 +36,21 @@ import { selectAllMechwarriors } from '../../store';
   `
 })
 export class TMMechwarriorsComponent implements OnInit {
-  settings$: Observable<SettingsGroup>;
+  destroyed$: Subject<boolean> = new Subject<boolean>();
 
-  mechwarriors$: Observable<Mechwarrior[]>;
-
-  skills$: Observable<SkillLevels>;
-
-  displayMechwarriors: Mechwarrior[];
-
-  displaySkills: SkillLevels;
+  mechwarriors: Mechwarrior[];
+  skills: SkillLevels;
 
   mechwarriorForm: FormGroup;
 
   constructor(
     private settingsService: SettingsService,
     private mechwarriorService: MechwarriorsService,
-    private store: Store<Mechwarrior[]>,
     private fb: FormBuilder,
-    private skills: TMSkillsService
+    private skillsService: TMSkillsService
   ) {
-    this.settings$ = this.settingsService.getSettings();
-    this.displayMechwarriors = [];
-    this.displaySkills = {
+    this.mechwarriors = [];
+    this.skills = {
       gunnery: {},
       piloting: {},
       guts: {},
@@ -67,28 +59,18 @@ export class TMMechwarriorsComponent implements OnInit {
   }
 
   ngOnInit() {
-    this.mechwarriors$ = this.mechwarriorService.getAllMechwarriors();
+    this.mechwarriorService
+      .getAllMechwarriors()
+      .pipe(takeUntil(this.destroyed$))
+      .subscribe(
+        (data: any) =>
+          (this.mechwarriors = Object.keys(data.mechwarriors.entities).map(i => data.mechwarriors.entities[i]))
+      );
 
-    this.skills$ = this.skills.getSkills();
-
-    const getData = this.mechwarriors$.subscribe(
-      (data: any) =>
-        (this.displayMechwarriors = Object.keys(data.mechwarriors.entities).map(i => data.mechwarriors.entities[i])),
-      error => {
-        console.log(error);
-      },
-      () => getData.unsubsribe()
-    );
-
-    const getSkills = this.skills$.subscribe(
-      (data: any) => {
-        this.displaySkills = data;
-      },
-      error => {
-        console.log(error);
-      },
-      () => getSkills.unsubscribe()
-    );
+    this.skillsService
+      .getSkills()
+      .pipe(takeUntil(this.destroyed$))
+      .subscribe(data => (this.skills = data));
   }
 
   onSubmit() {
@@ -96,28 +78,15 @@ export class TMMechwarriorsComponent implements OnInit {
   }
 
   onUpdateControls({ searchQuery }) {
-    let thisIsBad;
-    if (searchQuery === '') {
-      thisIsBad = this.mechwarriors$.subscribe(
+    this.mechwarriorService
+      .getAllMechwarriors()
+      .pipe(takeUntil(this.destroyed$))
+      .subscribe(
         (data: any) =>
-          (this.displayMechwarriors = Object.keys(data.mechwarriors.entities).map(i => data.mechwarriors.entities[i])),
-        error => {
-          console.log(error);
-        },
-        () => thisIsBad.unsubsribe()
-      );
-    } else {
-      thisIsBad = this.mechwarriors$.subscribe(
-        (data: any) =>
-          (this.displayMechwarriors = Object.keys(data.mechwarriors.entities)
+          (this.mechwarriors = Object.keys(data.mechwarriors.entities)
             .map(i => data.mechwarriors.entities[i])
-            .filter(mechwarrior => mechwarrior.name.toLowerCase().includes(searchQuery.toLowerCase()))),
-        error => {
-          console.log(error);
-        },
-        () => thisIsBad.unsubsribe()
+            .filter(mechwarrior => mechwarrior.name.toLowerCase().includes(searchQuery.toLowerCase())))
       );
-    }
   }
 
   onNewMechwarrior(event) {

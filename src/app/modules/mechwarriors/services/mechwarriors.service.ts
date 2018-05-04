@@ -1,12 +1,11 @@
 import { Injectable } from '@angular/core';
 import { LocalStorage } from 'ngx-store';
-import { Observable } from 'rxjs/Observable';
-import { of } from 'rxjs/observable/of';
+import { Observable, of, Subject, BehaviorSubject } from 'rxjs';
 import { Store, select } from '@ngrx/store';
 
 import { Mechwarrior } from '../models/mechwarriors';
-import { Subject, BehaviorSubject } from 'rxjs';
 
+import { selectAllMechwarriors } from '../store';
 import * as mechwarriorActions from '../store/mechwarriors.actions';
 import { tap } from 'rxjs/operators';
 
@@ -16,8 +15,8 @@ function generateUID() {
   // to ensure the random number provide enough bits.
   let firstPart: string | number = (Math.random() * 46656) | 0;
   let secondPart: string | number = (Math.random() * 46656) | 0;
-  firstPart = ("000" + firstPart.toString(36)).slice(-3);
-  secondPart = ("000" + secondPart.toString(36)).slice(-3);
+  firstPart = ('000' + firstPart.toString(36)).slice(-3);
+  secondPart = ('000' + secondPart.toString(36)).slice(-3);
   return `${firstPart}${secondPart}`;
 }
 /* tslint:enable */
@@ -37,12 +36,9 @@ export class MechwarriorsService {
   }
 
   updateMechwarrior(updatedMechwarrior: any): void {
-    this.mechwarriorGroups = this.mechwarriorGroups.map((mechwarrior, index) => {
-      if (mechwarrior.id === updatedMechwarrior.id) {
-        mechwarrior = updatedMechwarrior;
-      }
-      return mechwarrior;
-    });
+    this.mechwarriorGroups = this.mechwarriorGroups.map(
+      (mechwarrior, index) => (mechwarrior.id === updatedMechwarrior.id ? updatedMechwarrior : mechwarrior)
+    );
     this.store.dispatch(new mechwarriorActions.UpdateMechwarrior(updatedMechwarrior));
   }
 
@@ -52,9 +48,6 @@ export class MechwarriorsService {
   }
 
   getAllMechwarriors(): Observable<Mechwarrior[]> {
-    return this.store.pipe(
-      select('mechwarriors')
-      // tap(data => console.log(data))
-    );
+    return this.store.pipe(select('mechwarriors'));
   }
 }

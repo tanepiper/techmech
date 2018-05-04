@@ -1,5 +1,5 @@
 import { Component, OnInit, OnDestroy } from '@angular/core';
-import { Observable } from 'rxjs/Observable';
+import { Observable ,  of ,  Subject } from 'rxjs';
 import { Store, select } from '@ngrx/store';
 
 import { FormBuilder, FormGroup } from '@angular/forms';
@@ -10,15 +10,12 @@ import { LanceManagerService } from '../../services/lance-manager.service';
 import { Lance } from '../../models/lance-manager';
 
 import * as lanceManagerStore from '../../store';
-import { take } from 'rxjs/operator/take';
-import { tap, switchMap, map } from 'rxjs/operators';
-import { of } from 'rxjs/observable/of';
+
+import { tap, switchMap, map ,  takeUntil } from 'rxjs/operators';
 
 import { selectAllLances } from '../../store';
 import { Mechwarrior } from '../../../mechwarriors/models/mechwarriors';
-import { Subject } from 'rxjs';
 import { MechwarriorsService } from '../../../mechwarriors/services/mechwarriors.service';
-import { takeUntil } from 'rxjs/operators';
 
 @Component({
   selector: 'tm-lance-manger-container',
@@ -29,9 +26,9 @@ import { takeUntil } from 'rxjs/operators';
       <tm-lance-manager-header (newLance)="onNewLance($event)" (updateControls)="onUpdateControls($event)"></tm-lance-manager-header>
       <div class="card-body">
         <ul class="list-group">
-          <li class="list-group-item" *ngFor="let lance of displayLances; let i = index">
+          <li class="list-group-item" *ngFor="let lance of lances; let i = index">
             <tm-lance-list-item [lance]="lance" (deleteLance)="onDeleteLance($event)"
-              (updateLance)="onUpdateLance($event)" [mechwarriors]="displayMechwarriors"></tm-lance-list-item>
+              (updateLance)="onUpdateLance($event)" [mechwarriors]="mechwarriors"></tm-lance-list-item>
         </ul>
       </div>
     </div>
@@ -41,11 +38,8 @@ import { takeUntil } from 'rxjs/operators';
 export class TMLanceManagerComponent implements OnInit, OnDestroy {
   destroyed$: Subject<boolean> = new Subject<boolean>();
 
-  settings$: Observable<SettingsGroup>;
-
-  displayLances: Lance[];
-
-  displayMechwarriors: Mechwarrior[];
+  lances: Lance[];
+  mechwarriors: Mechwarrior[];
 
   lanceForm: FormGroup;
 
@@ -55,9 +49,8 @@ export class TMLanceManagerComponent implements OnInit, OnDestroy {
     private mwService: MechwarriorsService,
     private fb: FormBuilder
   ) {
-    this.settings$ = this.settingsService.getSettings();
-    this.displayLances = [];
-    this.displayMechwarriors = [];
+    this.lances = [];
+    this.mechwarriors = [];
   }
 
   ngOnInit() {
@@ -65,13 +58,13 @@ export class TMLanceManagerComponent implements OnInit, OnDestroy {
       .getAllLances()
       .pipe(takeUntil(this.destroyed$))
       .subscribe((data: any) => {
-        this.displayLances = Object.keys(data.lances.entities).map(i => data.lances.entities[i]);
+        this.lances = Object.keys(data.lances.entities).map(i => data.lances.entities[i]);
       });
     this.mwService
       .getAllMechwarriors()
       .pipe(takeUntil(this.destroyed$))
       .subscribe((data: any) => {
-        this.displayMechwarriors = Object.keys(data.mechwarriors.entities).map(i => data.mechwarriors.entities[i]);
+        this.mechwarriors = Object.keys(data.mechwarriors.entities).map(i => data.mechwarriors.entities[i]);
       });
   }
 
@@ -89,7 +82,7 @@ export class TMLanceManagerComponent implements OnInit, OnDestroy {
       .getAllLances()
       .pipe(takeUntil(this.destroyed$))
       .subscribe((data: any) => {
-        this.displayLances = Object.keys(data.lances.entities)
+        this.lances = Object.keys(data.lances.entities)
           .map(i => data.lances.entities[i])
           .filter(lance => lance.name.toLowerCase().includes(searchQuery.toLowerCase()));
       });

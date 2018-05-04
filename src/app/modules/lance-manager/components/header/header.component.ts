@@ -1,6 +1,6 @@
 import { Component, EventEmitter, OnDestroy, OnInit, Output } from '@angular/core';
 import { FormBuilder, FormGroup } from '@angular/forms';
-import { Subject } from 'rxjs/Subject';
+import { Subject } from 'rxjs';
 import { debounceTime, startWith, takeUntil } from 'rxjs/operators';
 
 @Component({
