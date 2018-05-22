@@ -47,18 +47,10 @@ import { Mechwarrior, SkillLevels } from '../../models/mechwarriors';
             <h3>Skills</h3>
           </div>
           <div class="row">
-            <div class="col">
               <tm-skill-tree [editMode]="false" [skill]="skills.gunnery" [value]="mechwarrior?.stats?.gunnery"></tm-skill-tree>
-            </div>
-            <div class="col">
               <tm-skill-tree [editMode]="false" [skill]="skills.piloting" [value]="mechwarrior?.stats?.piloting"></tm-skill-tree>
-            </div>
-            <div class="col">
               <tm-skill-tree [editMode]="false" [skill]="skills.guts" [value]="mechwarrior?.stats?.guts"></tm-skill-tree>
-            </div>
-            <div class="col">
               <tm-skill-tree [editMode]="false" [skill]="skills.tactics" [value]="mechwarrior?.stats?.tactics"></tm-skill-tree>
-            </div>
           </div>
         </div>
       </div>
@@ -104,6 +96,8 @@ export class TMMechwarriorListItemComponent implements OnInit {
   }
 
   onSave(mechwarrior) {
+    console.log(this.mechwarrior, mechwarrior);
+    this.mechwarrior = mechwarrior;
     this.updateMechwarrior.emit(mechwarrior);
   }
 

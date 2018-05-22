@@ -1,4 +1,5 @@
 import { Action } from '@ngrx/store';
+import { Update } from '@ngrx/entity';
 import { Mechwarrior } from '../models/mechwarriors';
 
 export const ADD_MECHWARRIOR = 'ADD_MECHWARRIOR';
@@ -14,24 +15,29 @@ export class LoadMechwarriors implements Action {
 
 export class AddMechwarrior implements Action {
   readonly type = ADD_MECHWARRIOR;
-  constructor(public payload: Mechwarrior) {}
+  constructor(public payload: { mechwarrior: Mechwarrior }) {}
 }
 
 export class AddAllMechwarriors implements Action {
   readonly type = ADD_ALL_MECHWARRIORS;
-  constructor(public payload: Mechwarrior[]) {}
+  constructor(public payload: { mechwarriors: Mechwarrior[] }) {}
 }
 
 export class DeleteMechwarrior implements Action {
   readonly type = DELETE_MECHWARRIOR;
 
-  constructor(public payload: Mechwarrior) {}
+  constructor(public payload: { mechwarrior: Mechwarrior }) {}
 }
 
 export class UpdateMechwarrior implements Action {
   readonly type = UPDATE_MECHWARRIOR;
 
-  constructor(public payload: Mechwarrior) {}
+  constructor(public payload: { mechwarrior: Update<Mechwarrior> }) {}
 }
 
-export type MechwarriorActions = AddMechwarrior | DeleteMechwarrior | UpdateMechwarrior | AddAllMechwarriors | LoadMechwarriors;
+export type MechwarriorActions =
+  | AddMechwarrior
+  | DeleteMechwarrior
+  | UpdateMechwarrior
+  | AddAllMechwarriors
+  | LoadMechwarriors;

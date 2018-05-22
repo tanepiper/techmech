@@ -1,7 +1,7 @@
 import { Component, EventEmitter, OnDestroy, OnInit, Output } from '@angular/core';
 import { FormBuilder, FormGroup } from '@angular/forms';
 import { Subject } from 'rxjs';
-import { debounceTime, startWith, takeUntil } from 'rxjs/operators';
+import { debounceTime, startWith, takeUntil, skipWhile } from 'rxjs/operators';
 
 @Component({
   selector: 'tm-mechwarriors-header',
@@ -43,6 +43,7 @@ export class TmMechwarriorsHeaderComponent implements OnInit, OnDestroy {
       .pipe(
         debounceTime(200),
         startWith({ searchQuery: ''}),
+        skipWhile(value => value.searchQuery.length < 3),
         takeUntil(this.cleanup$)
       ).subscribe(formState => this.updateControls.emit(formState));
   }

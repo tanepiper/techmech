@@ -8,25 +8,37 @@ export interface State extends EntityState<Mechwarrior> {
   selectedMechwarrior: number | null;
 }
 
-export const MechwarriorsAdapter: EntityAdapter<Mechwarrior> = createEntityAdapter<Mechwarrior>();
+export const entityAdapter: EntityAdapter<Mechwarrior> = createEntityAdapter<Mechwarrior>();
 
-export const initialState: State = MechwarriorsAdapter.getInitialState({
+export const initialState: State = entityAdapter.getInitialState({
   selectedMechwarrior: null
 });
 
-export function MechwarriorsReducer(state: State = initialState, action: MechwarriorsActions.MechwarriorActions): State {
+export function reducer(state: State = initialState, action: MechwarriorsActions.MechwarriorActions): State {
   switch (action.type) {
-    case MechwarriorsActions.LOAD_MECHWARRIORS:
-      return state;
     case MechwarriorsActions.ADD_ALL_MECHWARRIORS:
-      return MechwarriorsAdapter.addAll(action.payload, state);
+      return entityAdapter.addAll(action.payload.mechwarriors, state);
     case MechwarriorsActions.ADD_MECHWARRIOR:
-      return MechwarriorsAdapter.addOne(action.payload, state);
+      return entityAdapter.addOne(action.payload.mechwarrior, state);
     case MechwarriorsActions.UPDATE_MECHWARRIOR:
-      return MechwarriorsAdapter.updateOne({ id: action.payload.id, changes: action.payload }, state);
+      return entityAdapter.updateOne(action.payload.mechwarrior, state);
     case MechwarriorsActions.DELETE_MECHWARRIOR:
-      return MechwarriorsAdapter.removeOne(action.payload.id, state);
+      return entityAdapter.removeOne(action.payload.mechwarrior.id, state);
     default:
       return state;
   }
 }
+
+export const {
+  // select the array of user ids
+  selectIds: selectMechwarriorIds,
+
+  // select the dictionary of Mechwarrior entities
+  selectEntities: selectMechwarriorEntities,
+
+  // select the array of Mechwarriors
+  selectAll: selectAllMechwarriors,
+
+  // select the total Mechwarrior count
+  selectTotal: selectMechwarriorTotal,
+} = entityAdapter.getSelectors();

@@ -1,11 +1,4 @@
-import {
-  Component,
-  Input,
-  Output,
-  EventEmitter,
-  forwardRef,
-  ChangeDetectionStrategy
-} from '@angular/core';
+import { Component, Input, Output, EventEmitter, forwardRef, ChangeDetectionStrategy } from '@angular/core';
 import { ControlValueAccessor, NG_VALUE_ACCESSOR } from '@angular/forms';
 import { SkillLevels, Mechwarrior } from '../../models/mechwarriors';
 
@@ -29,22 +22,28 @@ const SKILL_VALUE_ACCESSOR = {
         </div>
       </div>
       <div class="card-body">
-        <div class="btn-group flex-wrap" role="group">
-          <button *ngFor="let level of skill.levels | keysOf; let i = index" class="skill btn btn-default" [ngbTooltip]="tipContent"
-            container=".skill-tree" [ngClass]="{'btn-info': isActive(i, level)}" (click)="onClick($event, i)">{{level}}
-            <ng-template #tipContent>
+        <div class="container">
+          <div class="row">
+            <div class="col-8">
+              <div class="btn-group flex-wrap" role="group">
+                <button *ngFor="let level of skill.levels | keysOf; let i = index" class="skill btn"
+                [ngClass]="{'btn-info': isActive(i, level), 'btn-default': !isActive(i, level)}"
+                (click)="onClick($event, i)">{{level}}</button>
+              </div>
+            </div>
+            <div class="col-4">
               <div class="card">
                 <div class="card-header">
-                  <strong class="card-title">{{level}}</strong>
+                  <strong class="card-title">Level {{value}}</strong>
                 </div>
                 <div class="card-body">
-                  <p><strong>Required XP:</strong> {{skill.levels[level].XP}}</p>
-                  <p><strong>Bonus:</strong> {{skill.levels[level].bonus}}</p>
-                  <p *ngFor="let skill of skill.levels[level].skills"><strong>{{skill.name}}:</strong> {{skill.description}}</p>
+                  <p><strong>Required XP:</strong> {{levelInfo(value).XP}}</p>
+                  <p><strong>Bonus:</strong> {{levelInfo(value).bonus}}</p>
+                  <p *ngFor="let skill of levelInfo(value).skills"><strong>{{skill.name}}:</strong> {{skill.description}}</p>
                 </div>
               </div>
-            </ng-template>
-          </button>
+            </div>
+          </div>
         </div>
       </div>
     </div>
@@ -93,12 +92,17 @@ export class TMSkillTreeComponent implements ControlValueAccessor {
     return false;
   }
 
+  levelInfo(level) {
+    return (this.skill.levels && Object.keys(this.skill.levels).length > 0) && this.skill.levels[`Level ${level}`] || {};
+  }
+
   skillXPTotal(skill) {
-    return (
-      Object.keys((skill && skill.levels) || []).slice(0, this.value) || []
-    ).reduce((previous: number, next: any) => {
-      const result = previous + skill.levels[next].XP;
-      return result;
-    }, 0);
+    return (Object.keys((skill && skill.levels) || []).slice(0, this.value) || []).reduce(
+      (previous: number, next: any) => {
+        const result = previous + skill.levels[next].XP;
+        return result;
+      },
+      0
+    );
   }
 }

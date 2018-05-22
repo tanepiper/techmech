@@ -1,13 +1,18 @@
 import { createSelector, createFeatureSelector, ActionReducerMap } from '@ngrx/store';
 
-import * as MechwarriorsReducer from './mechwarriors.reducer';
+import * as mechwarriorsReducer from './mechwarriors.reducer';
 
-export const reducers: ActionReducerMap<any> = {
-  mechwarriors: MechwarriorsReducer.MechwarriorsReducer
+export interface State {
+  mechwarriors: mechwarriorsReducer.State;
+}
+
+export const reducers: ActionReducerMap<State> = {
+  mechwarriors: mechwarriorsReducer.reducer
 };
 
-export const selectMechwarriorsState = createFeatureSelector<MechwarriorsReducer.State>('mechwarriors');
+export const selectMechwarriorsState = createFeatureSelector<mechwarriorsReducer.State>('mechwarriors');
 
-export const { selectAll: selectAllMechwarriors } = MechwarriorsReducer.MechwarriorsAdapter.getSelectors(
-  selectMechwarriorsState
+export const selectAllMechwarriors = createSelector(
+  selectMechwarriorsState,
+  mechwarriorsReducer.selectAllMechwarriors
 );

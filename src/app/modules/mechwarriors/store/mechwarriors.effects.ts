@@ -15,10 +15,12 @@ export class MechwarriorEffects {
     exhaustMap(() => {
       return this.service
         .getAllMechwarriors()
-        .pipe(map(data => new mechwarriorActions.AddAllMechwarriors(data)), catchError(error => of(error)));
+        .pipe(
+          map(data => new mechwarriorActions.AddAllMechwarriors({ mechwarriors: data })),
+          catchError(error => of(error))
+        );
     })
   );
 }
-
 
 export const effects: any[] = [MechwarriorEffects];

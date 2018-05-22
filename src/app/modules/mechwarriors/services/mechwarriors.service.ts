@@ -26,25 +26,25 @@ export class MechwarriorsService {
   @LocalStorage() mechwarriorGroups: Mechwarrior[] = [];
 
   constructor(private store: Store<Mechwarrior[]>) {
-    this.store.dispatch(new mechwarriorActions.AddAllMechwarriors(this.mechwarriorGroups));
+    this.store.dispatch(new mechwarriorActions.AddAllMechwarriors({ mechwarriors: this.mechwarriorGroups }));
   }
 
   addMechwarrior(newMechWarrior: Mechwarrior): void {
     const mechwarrior = { ...newMechWarrior, id: generateUID() };
     this.mechwarriorGroups.push(mechwarrior);
-    this.store.dispatch(new mechwarriorActions.AddMechwarrior(mechwarrior));
+    this.store.dispatch(new mechwarriorActions.AddMechwarrior({ mechwarrior }));
   }
 
   updateMechwarrior(updatedMechwarrior: any): void {
     this.mechwarriorGroups = this.mechwarriorGroups.map(
       (mechwarrior, index) => (mechwarrior.id === updatedMechwarrior.id ? updatedMechwarrior : mechwarrior)
     );
-    this.store.dispatch(new mechwarriorActions.UpdateMechwarrior(updatedMechwarrior));
+    this.store.dispatch(new mechwarriorActions.UpdateMechwarrior({ mechwarrior: updatedMechwarrior }));
   }
 
   deleteMechwarrior(deleteMechwarrior: Mechwarrior): void {
     this.mechwarriorGroups = this.mechwarriorGroups.filter(mechwarrior => mechwarrior.id !== deleteMechwarrior.id);
-    this.store.dispatch(new mechwarriorActions.DeleteMechwarrior(deleteMechwarrior));
+    this.store.dispatch(new mechwarriorActions.DeleteMechwarrior({ mechwarrior: deleteMechwarrior }));
   }
 
   getAllMechwarriors(): Observable<Mechwarrior[]> {
