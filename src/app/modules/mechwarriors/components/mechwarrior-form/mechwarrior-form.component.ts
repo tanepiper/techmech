@@ -24,25 +24,6 @@ export class TMMechwarriorFormComponent implements OnInit {
 
   mechwarriorForm: FormGroup;
 
-  protected playerTypes = [
-    { value: 'npc', label: 'Standard NPC' },
-    { value: 'ks', label: 'Kickstarter NPC' },
-    { value: 'ply', label: 'Player' }
-  ];
-
-  protected primarySkills = [
-    'Multi-target',
-    'Evasive Movement',
-    'Bulwark',
-    'Sensor Lock'
-  ];
-  protected secondarySkills = [
-    'Breaching Shot',
-    'Ace Pilot',
-    'Juggernaut',
-    'Master Tactician'
-  ];
-
   constructor(private fb: FormBuilder) {}
 
   firstLevelSkillsDisabled = false;

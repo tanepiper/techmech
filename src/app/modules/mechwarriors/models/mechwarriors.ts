@@ -18,7 +18,11 @@ export interface Mechwarrior {
 
 export interface Skill {
   name: string;
+  effect: string;
+  type: string;
   description: string;
+  level?: string;
+  bonus?: string[] | number[];
 }
 
 export interface SkillLevels {

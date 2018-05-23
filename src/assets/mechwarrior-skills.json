@@ -1,335 +1,177 @@
 {
   "gunnery": {
     "name": "Gunnery",
-    "levels": {
-      "Level 1": {
-        "XP": 0,
-        "bonus": "+2.5% ranged to hit",
-        "skills": []
+    "skills": [
+      {
+        "name": "Increased Gunnery Range",
+        "effect": "Passive",
+        "type": "core",
+        "bonus": [2.5, 5, 7.5, 10, 12.5, 15, 17.5, 20, 22.5, 25],
+        "description": "+[bonus]% gunnery range increase"
       },
-      "Level 2": {
-        "XP": 0,
-        "bonus": "+5% ranged to hit",
-        "skills": []
+      {
+        "name": "Multi-target",
+        "effect": "Action",
+        "type": "primary",
+        "level": 5,
+        "description": "Pilot can fire weapons at up to three separate targets within their mech's current firing arc"
       },
-      "Level 3": {
-        "XP": 400,
-        "bonus": "+7.5% ranged to hit",
-        "skills": []
-      },
-      "Level 4": {
-        "XP": 900,
-        "bonus": "+10% ranged to hit",
-        "skills": []
-      },
-      "Level 5": {
-        "XP": 1600,
-        "bonus": "+12.5% ranged to hit",
-        "skills": [
-          {
-            "name": "Multi-target",
-            "description":
-              "ACTION: Fire weapons at up to three separate targets within this 'Mech's current firing arc."
-          }
-        ]
-      },
-      "Level 6": {
-        "XP": 2500,
-        "bonus": "+15% ranged to hit",
-        "skills": []
-      },
-      "Level 7": {
-        "XP": 3600,
-        "bonus": "+17.5% ranged to hit",
-        "skills": []
-      },
-      "Level 8": {
-        "XP": 4900,
-        "bonus": "+20% ranged to hit",
-        "skills": [
-          {
-            "name": "Breaching Shot",
-            "description": "PASSIVE: Attacks with a single weapon ignore COVER and GUARDED on the target."
-          }
-        ]
-      },
-      "Level 9": {
-        "XP": 6400,
-        "bonus": "+22.5% ranged to hit",
-        "skills": []
-      },
-      "Level 10": {
-        "XP": 8100,
-        "bonus": "+25% ranged to hit",
-        "skills": []
+      {
+        "name": "Breaching Shot",
+        "effect": "Passive",
+        "type": "secondary",
+        "level": 8,
+        "description": "Attacks with a single weapon ignore COVER and GUARDED on the pilots target"
       }
-    }
+    ]
   },
   "piloting": {
     "name": "Piloting",
-    "levels": {
-      "Level 1": {
-        "XP": 0,
-        "bonus": "+2.5% melee to hit",
-        "skills": []
+    "skills": [
+      {
+        "name": "Melee chance to hit",
+        "effect": "Passive",
+        "type": "core",
+        "bonus": [2.5, 5, 7.5, 10, 12.5, 15, 17.5, 20, 22.5, 25],
+        "description": "+[bonus]% chance for a melee hit to land"
       },
-      "Level 2": {
-        "XP": 0,
-        "bonus": "+5% melee to hit",
-        "skills": []
+      {
+        "name": "Unsteady Threashold",
+        "effect": "Passive",
+        "type": "core",
+        "bonus": [0, 0, 0, 1, 1, 1, 1, 1, 2, 2],
+        "description": "+[bonus] increase to threashold required to make a pilots mech unsteady"
       },
-      "Level 3": {
-        "XP": 400,
-        "bonus": "+7.5% melee to hit",
-        "skills": []
+      {
+        "name": "Max Evade Chevrons",
+        "effect": "Passive",
+        "type": "core",
+        "bonus": [0, 0, 0, 1, 1, 1, 1, 1, 1, 2],
+        "description": "+[bonus] increase to maximum number of evade chevrons pilot generate per round"
       },
-      "Level 4": {
-        "XP": 900,
-        "bonus": "+10% melee to hit",
-        "skills": [
-          {
-            "name": "+1 Unsteady Threashold",
-            "description": "PASSIVE: Increase the threashold required to make your mech unstead"
-          }
-        ]
+      {
+        "name": "Evasive Movement",
+        "effect": "Passive",
+        "type": "primary",
+        "level": 5,
+        "description": "Pilot generates an extra EVASIVE charge from movement actions (up to maximum evade chevrons)"
       },
-      "Level 5": {
-        "XP": 1600,
-        "bonus": "+12.5% melee to hit",
-        "skills": [
-          {
-            "name": "+1 Evasive Movement",
-            "description":
-              "PASSIVE: This unit generates an extra EVASIVE charge from movement actions (up to its maximum)."
-          }
-        ]
+      {
+        "name": "Increased Sprint Distance",
+        "effect": "Passive",
+        "type": "core",
+        "level": 7,
+        "description": "+20% increase to the pilot's mech sprint distance"
       },
-      "Level 6": {
-        "XP": 2500,
-        "bonus": "+15% melee to hit",
-        "skills": [
-          {
-            "name": "+1 Max Evade",
-            "description": "PASSIVE: Increase the maximum number of evade tokens you can generate per round"
-          }
-        ]
-      },
-      "Level 7": {
-        "XP": 3600,
-        "bonus": "+17.5% melee to hit",
-        "skills": [
-          {
-            "name": "+20% Sprint Distance",
-            "description": "PASSIVE: Increase your mechs sprint distance by 20%"
-          }
-        ]
-      },
-      "Level 8": {
-        "XP": 4900,
-        "bonus": "+20% melee to hit",
-        "skills": [
-          {
-            "name": "Ace Pilot",
-            "description": "PASSIVE: This unit can move after shooting if it has not moved yet."
-          }
-        ]
-      },
-      "Level 9": {
-        "XP": 6400,
-        "bonus": "+22.5% melee to hit",
-        "skills": [
-          {
-            "name": "+2 Unsteady Threashold",
-            "description": "PASSIVE: Increase the threashold required to make your mech unstead"
-          }
-        ]
-      },
-      "Level 10": {
-        "XP": 8100,
-        "bonus": "+25% melee to hit",
-        "skills": [
-          {
-            "name": "+2 Max Evade",
-            "description": "PASSIVE: Increase the maximum number of evade tokens you can generate per round"
-          }
-        ]
+      {
+        "name": "Ace Pilot",
+        "effect": "Passive",
+        "type": "secondary",
+        "level": 8,
+        "description": "Pilot move after shooting, only if they have not moved before firing"
       }
-    }
+    ]
   },
   "guts": {
     "name": "Guts",
-    "levels": {
-      "Level 1": {
-        "XP": 0,
-        "bonus": "-5% chance to die when incapacitated",
-        "skills": []
+    "skills": [
+      {
+        "name": "Pilot Reduced Chance of Dying",
+        "effect": "Passive",
+        "type": "core",
+        "bonus": [5, 10, 15, 20, 25, 30, 35, 40, 45, 50],
+        "description": "-[bonus]% reduced chance of dying when incapacitated"
       },
-      "Level 2": {
-        "XP": 0,
-        "bonus": "-10% chance to die when incapacitated",
-        "skills": []
+      {
+        "name": "Max Pilot Injuries",
+        "effect": "Passive",
+        "type": "core",
+        "bonus": [0, 0, 0, 1, 1, 1, 2, 2, 2, 3],
+        "description": "+[bonus] maximum number of pilot injuries"
       },
-      "Level 3": {
-        "XP": 400,
-        "bonus": "-15% chance to die when incapacitated",
-        "skills": []
+      {
+        "name": "Reduced Recoil Penalty",
+        "effect": "Passive",
+        "type": "core",
+        "bonus": [0, 0, 0, 0, -1, -1, -1, -2, -2, -2],
+        "description": "-[bonus] reduction in recoil penelty"
       },
-      "Level 4": {
-        "XP": 900,
-        "bonus": "-20% chance to die when incapacitated",
-        "skills": [
-          {
-            "name": "+1 Injuries",
-            "description": "PASSIVE: Increase your mechwarriror maximum injuries to 4"
-          }
-        ]
+      {
+        "name": "Increased Overheat Threshold",
+        "effect": "Passive",
+        "type": "core",
+        "bonus": [0, 0, 0, 0, 0, 15, 15, 15, 30, 30],
+        "description": "+[bonus]% threashold of pilot's mech overheatting limit"
       },
-      "Level 5": {
-        "XP": 1600,
-        "bonus": "-25% chance to die when incapacitated",
-        "skills": [
-          {
-            "name": "-1 Recoil",
-            "description": "PASSIVE: Remove a recoil penalty"
-          },
-          {
-            "name": "Gain Bulwark",
-            "description":
-              "PASSIVE: Gain GUARDED (50% damage reduction against ranged attacks to the front and side) when remaining stationary."
-          }
-        ]
+      {
+        "name": "Bulwark",
+        "effect": "Passive",
+        "type": "primary",
+        "level": 5,
+        "description": "50% damage reduction against ranged attacks to the front and side when remaining stationary"
       },
-      "Level 6": {
-        "XP": 2500,
-        "bonus": "-30% chance to die when incapacitated",
-        "skills": [
-          {
-            "name": "+15 Overheat Threshold",
-            "description": "PASSIVE: Increase the threashold of your mechs overheatting limit"
-          }
-        ]
-      },
-      "Level 7": {
-        "XP": 3600,
-        "bonus": "-35% chance to die when incapacitated",
-        "skills": [
-          {
-            "name": "+2 Injuries",
-            "description": "PASSIVE: Increase your mechwarriror maximum injuries to 5"
-          }
-        ]
-      },
-      "Level 8": {
-        "XP": 4900,
-        "bonus": "-40% chance to die when incapacitated",
-        "skills": [
-          {
-            "name": "-2 Recoil",
-            "description": "PASSIVE: Remove a recoil penalty"
-          },
-          {
-            "name": "Gain Juggernaut",
-            "description": "PASSIVE: Successful Melee attacks knocks your target back one Initiative Phase."
-          }
-        ]
-      },
-      "Level 9": {
-        "XP": 6400,
-        "bonus": "-45% chance to die when incapacitated",
-        "skills": [
-          {
-            "name": "+30 Overheat Threshold",
-            "description": "PASSIVE: Increase the threashold of your mechs overheatting limit"
-          }
-        ]
-      },
-      "Level 10": {
-        "XP": 8100,
-        "bonus": "-50% chance to die when incapacitated",
-        "skills": [
-          {
-            "name": "+3 Injuries",
-            "description": "PASSIVE: Increase your mechwarriror maximum injuries to 6"
-          }
-        ]
+      {
+        "name": "Juggernaut",
+        "effect": "Passive",
+        "type": "secondary",
+        "level": 8,
+        "description": "Successful Melee attacks knocks your target back one Initiative Phase"
       }
-    }
+    ]
   },
   "tactics": {
     "name": "Tactics",
-    "levels": {
-      "Level 1": {
-        "XP": 0,
-        "bonus": "No Bonuses until level 4",
-        "skills": []
+    "skills": [
+      {
+        "name": "Indirect Fire Penalty",
+        "effect": "Passive",
+        "type": "core",
+        "bonus": [0, 0, 0, 1, 1, 1, 2, 2, 2, 3],
+        "description": "-[bonus] reduction in indirect fire penalty"
       },
-      "Level 2": {
-        "XP": 0,
-        "bonus": "No Bonuses until level 4",
-        "skills": []
+      {
+        "name": "Increased sensor range",
+        "effect": "Passive",
+        "type": "core",
+        "bonus": [0, 0, 0, 0, 45, 45, 45, 90, 90, 90],
+        "description": "-[bonus]m reduction in minimum sensor range"
       },
-      "Level 3": {
-        "XP": 400,
-        "bonus": "No Bonuses until level 4",
-        "skills": []
+      {
+        "name": "Called Shot Ability",
+        "effect": "Passive",
+        "type": "core",
+        "bonus": ["", "", "", "", "", "Bonus", "Bonus", "Bonus", "Mastery", "Mastery"],
+        "description": "Called Shot [bonus]"
       },
-      "Level 4": {
-        "XP": 900,
-        "bonus": "-1 indirect fire penalty",
-        "skills": [
-          {
-            "name": "Gain Identify Vehicle Types",
-            "description": "PASSIVE: Gain the abiility to Identify type (Mech,Vehicle,Turret)"
-          }
-        ]
+      {
+        "name": "Identify Vehicle Types",
+        "effect": "Passive",
+        "type": "core",
+        "level": 4,
+        "description": "Pilot can identify enemy type (e.g Mech, Vehicle, Turret) at increased range"
       },
-      "Level 5": {
-        "XP": 1600,
-        "bonus": "-45m min range",
-        "skills": [
-          {
-            "name": "Gain Sensor Lock",
-            "description":
-              "ACTION: Select a target within sensor range to reveal it until the end of the current round and remove two of its EVASIVE charges."
-          }
-        ]
+      {
+        "name": "Sensor Lock",
+        "effect": "Action",
+        "type": "primary",
+        "level": 5,
+        "description":
+          "Select a target within sensor range to reveal it until the end of the current round and remove two of its EVASIVE charges"
       },
-      "Level 6": {
-        "XP": 2500,
-        "bonus": "Called Shot Bonus",
-        "skills": []
+      {
+        "name": "Identify Vehicle Tonnage",
+        "effect": "Passive",
+        "type": "core",
+        "level": 7,
+        "description": "Pilot can identify mech and vehicle tonnage"
       },
-      "Level 7": {
-        "XP": 3600,
-        "bonus": "-2 indirect fire penalty",
-        "skills": [
-          {
-            "name": "Gain Identify tonnage",
-            "description": "PASSIVE: You can identify mech and vehicle tonnage at a greater range"
-          }
-        ]
-      },
-      "Level 8": {
-        "XP": 4900,
-        "bonus": "-90m min range",
-        "skills": [
-          {
-            "name": "Gain Master Tactician",
-            "description":
-              "PASSIVE: Mechs piloted by this MechWarrior gain +1 Initiative, and remove one bar of stability damage when Reserving."
-          }
-        ]
-      },
-      "Level 9": {
-        "XP": 6400,
-        "bonus": "Called Shot Mastery",
-        "skills": []
-      },
-      "Level 10": {
-        "XP": 8100,
-        "bonus": "No indirect fire penalties",
-        "skills": []
+      {
+        "name": "Master Tactician",
+        "effect": "Action",
+        "type": "secondary",
+        "level": 8,
+        "description": "Pilot's mech gains +1 Initiative. Can remove one bar of stability damage when Reserving"
       }
-    }
+    ]
   }
 }

@@ -3,6 +3,7 @@ import { NgModule } from '@angular/core';
 import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
 import { ReactiveFormsModule } from '@angular/forms';
 import { StoreModule } from '@ngrx/store';
+import { EffectsModule } from '@ngrx/effects';
 // Components
 import { TmMechwarriorsHeaderComponent } from './components/header/header.component';
 import { TMMechwarriorFormComponent } from './components/mechwarrior-form/mechwarrior-form.component';
@@ -18,7 +19,8 @@ import { effects } from './store/mechwarriors.effects';
 
 // Pipes
 import { KeysOfPipe } from './pipes/keys.pipe';
-import { EffectsModule } from '@ngrx/effects';
+import { LevelKeyPipe } from './pipes/level-key.pipe';
+import { BonusTextPipe } from './pipes/bonus.pipe';
 
 @NgModule({
   imports: [
@@ -34,7 +36,9 @@ import { EffectsModule } from '@ngrx/effects';
     TMMechwarriorListItemComponent,
     TMMechwarriorFormComponent,
     TMSkillTreeComponent,
-    KeysOfPipe
+    KeysOfPipe,
+    LevelKeyPipe,
+    BonusTextPipe
   ],
   providers: [MechwarriorsService, TMSkillsService]
 })
