@@ -1,17 +1,15 @@
 import { Component, OnInit, OnDestroy } from '@angular/core';
-import { Observable ,  of ,  Subject } from 'rxjs';
+import { Observable, of, Subject } from 'rxjs';
 import { Store, select } from '@ngrx/store';
 
 import { FormBuilder, FormGroup } from '@angular/forms';
 
-import { SettingsService } from '../../../settings/services/settings.service';
-import { SettingsGroup } from '../../../settings/models/setting';
 import { LanceManagerService } from '../../services/lance-manager.service';
 import { Lance } from '../../models/lance-manager';
 
 import * as lanceManagerStore from '../../store';
 
-import { tap, switchMap, map ,  takeUntil } from 'rxjs/operators';
+import { tap, switchMap, map, takeUntil } from 'rxjs/operators';
 
 import { selectAllLances } from '../../store';
 import { Mechwarrior } from '../../../mechwarriors/models/mechwarriors';
@@ -44,7 +42,6 @@ export class TMLanceManagerComponent implements OnInit, OnDestroy {
   lanceForm: FormGroup;
 
   constructor(
-    private settingsService: SettingsService,
     private lanceService: LanceManagerService,
     private mwService: MechwarriorsService,
     private fb: FormBuilder
@@ -58,13 +55,17 @@ export class TMLanceManagerComponent implements OnInit, OnDestroy {
       .getAllLances()
       .pipe(takeUntil(this.destroyed$))
       .subscribe((data: any) => {
-        this.lances = Object.keys(data.lances.entities).map(i => data.lances.entities[i]);
+        this.lances = Object.keys(data.lances.entities).map(
+          i => data.lances.entities[i]
+        );
       });
     this.mwService
       .getAllMechwarriors()
       .pipe(takeUntil(this.destroyed$))
       .subscribe((data: any) => {
-        this.mechwarriors = Object.keys(data.mechwarriors.entities).map(i => data.mechwarriors.entities[i]);
+        this.mechwarriors = Object.keys(data.mechwarriors.entities).map(
+          i => data.mechwarriors.entities[i]
+        );
       });
   }
 
@@ -84,7 +85,9 @@ export class TMLanceManagerComponent implements OnInit, OnDestroy {
       .subscribe((data: any) => {
         this.lances = Object.keys(data.lances.entities)
           .map(i => data.lances.entities[i])
-          .filter(lance => lance.name.toLowerCase().includes(searchQuery.toLowerCase()));
+          .filter(lance =>
+            lance.name.toLowerCase().includes(searchQuery.toLowerCase())
+          );
       });
   }
 

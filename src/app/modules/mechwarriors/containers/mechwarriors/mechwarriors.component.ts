@@ -62,12 +62,12 @@ export class TMMechwarriorsComponent implements OnInit {
     this.mechwarriorService
       .getAllMechwarriors()
       .pipe(takeUntil(this.destroyed$))
-      .subscribe(
-        (data: any) => {
-          console.log(data);
-          (this.mechwarriors = (data && Object.keys(data.mechwarriors.entities) || []).map(k => data.mechwarriors.entities[k]));
-        }
-      );
+      .subscribe((data: any) => {
+        this.mechwarriors = (
+          (data && Object.keys(data.mechwarriors.entities)) ||
+          []
+        ).map(k => data.mechwarriors.entities[k]);
+      });
 
     this.skillsService
       .getSkills()
@@ -85,8 +85,14 @@ export class TMMechwarriorsComponent implements OnInit {
       .pipe(takeUntil(this.destroyed$))
       .subscribe(
         (data: any) =>
-          (this.mechwarriors = (data && Object.keys(data.mechwarriors.entities) || []).map(k => data.mechwarriors.entities[k])
-            .filter(mechwarrior => mechwarrior.name.toLowerCase().includes(searchQuery.toLowerCase())))
+          (this.mechwarriors = (
+            (data && Object.keys(data.mechwarriors.entities)) ||
+            []
+          )
+            .map(k => data.mechwarriors.entities[k])
+            .filter(mechwarrior =>
+              mechwarrior.name.toLowerCase().includes(searchQuery.toLowerCase())
+            ))
       );
   }
 
