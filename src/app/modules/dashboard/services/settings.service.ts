@@ -1,6 +1,6 @@
 import { Injectable } from '@angular/core';
 import { LocalStorage } from 'ngx-store';
-import { Observable ,  of } from 'rxjs';
+import { Observable, of } from 'rxjs';
 
 import { Setting, SettingsGroup } from '../models/setting';
 
@@ -23,7 +23,7 @@ export class SettingsService {
     });
   }
 
-  deleteSetting({key}): void {
+  deleteSetting({ key }): void {
     this.settingsInterface.settings = this.settingsInterface.settings.filter(setting => setting.key !== key);
   }
 

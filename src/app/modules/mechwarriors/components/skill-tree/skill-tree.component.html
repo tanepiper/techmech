@@ -9,12 +9,8 @@
     <div class="container">
       <div class="row">
         <div class="col-8">
-          <div class="btn-group flex-wrap"
-            role="group">
-            <button *ngFor="let level of 10 | levelKey; let i = index"
-              class="skill btn"
-              [ngClass]="{'btn-info': isActive(i, level), 'btn-default': !isActive(i, level)}"
-
+          <div class="btn-group flex-wrap" role="group">
+            <button *ngFor="let level of 10 | levelKey; let i = index" class="skill btn" [ngClass]="{'btn-info': isActive(i, level), 'btn-default': !isActive(i, level)}"
               (click)="onClick($event, i)">{{level}}</button>
           </div>
         </div>
@@ -28,18 +24,18 @@
             </div>
             <div class="card-body">
               <ul>
-                <ng-template ngFor
-                  let-skill
-                  [ngForOf]="skill.skills">
+                <ng-template ngFor let-skill [ngForOf]="skill.skills">
                   <li *ngIf="skill.type == 'core' && skill.bonus && skill.bonus[value - 1] > 0">
-                    <p>{{skill.effect}}: {{ (skill.bonus ? skill.bonus[value - 1] :
-                      '') | bonusText:skill.description}}</p>
+                    <p>{{skill.effect}}: {{ (skill.bonus ? skill.bonus[value - 1] : '') | bonusText:skill.description}}</p>
                   </li>
                   <li *ngIf="skill.type == 'core' && skill.level && skill.level <= value">
                     <p>{{skill.effect}}: {{skill.description}}</p>
                   </li>
                   <li *ngIf="skill.type === 'primary' && skill.level <= value">
-                      <p>{{skill.effect}}: {{skill.description}}</p>
+                    <p>{{skill.effect}}: {{skill.name}} - {{skill.description}}</p>
+                  </li>
+                  <li *ngIf="skill.type === 'secondary' && skill.level <= value">
+                    <p>{{skill.effect}}: {{skill.name}} - {{skill.description}}</p>
                   </li>
                 </ng-template>
               </ul>
