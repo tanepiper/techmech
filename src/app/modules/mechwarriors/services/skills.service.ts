@@ -5,7 +5,9 @@ import { Observable } from 'rxjs';
 
 import { Skill, SkillLevels } from '../models/mechwarriors';
 
-@Injectable()
+@Injectable({
+  providedIn: 'root'
+})
 export class TMSkillsService {
   constructor(private http: HttpClient) {}
 

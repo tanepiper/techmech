@@ -24,7 +24,7 @@
             </div>
             <div class="card-body">
               <ul>
-                <ng-template ngFor let-skill [ngForOf]="skill.skills">
+                <ng-template ngFor let-skill [ngForOf]="forRendering()">
                   <li *ngIf="skill.type == 'core' && skill.bonus && skill.bonus[value - 1] > 0">
                     <p>{{skill.effect}}: {{ (skill.bonus ? skill.bonus[value - 1] : '') | bonusText:skill.description}}</p>
                   </li>
@@ -32,9 +32,11 @@
                     <p>{{skill.effect}}: {{skill.description}}</p>
                   </li>
                   <li *ngIf="skill.type === 'primary' && skill.level <= value">
+                    <h6>Possible Primary Skills:</h6>
                     <p>{{skill.effect}}: {{skill.name}} - {{skill.description}}</p>
                   </li>
                   <li *ngIf="skill.type === 'secondary' && skill.level <= value">
+                      <h6>Possible Secondary Skills:</h6>
                     <p>{{skill.effect}}: {{skill.name}} - {{skill.description}}</p>
                   </li>
                 </ng-template>

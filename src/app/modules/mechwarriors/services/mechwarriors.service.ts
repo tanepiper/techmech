@@ -21,6 +21,16 @@ function generateUID() {
 }
 /* tslint:enable */
 
+/**
+ * A service that provides single or lists of mechwarriors for your lances.  In these Mechwarrior
+ * items you can set their skill levels and available primary, secondary and core skills.
+ *
+ * The service uses a @LocalStorage decorator on it's mechwarriorGroups property which is a list of
+ * Mechwarrior items.
+ *
+ * @provided 'root'
+ * @param {Array<Mechwarrior>} mechwarriorGroups Grouping of mechwarrirors
+ */
 @Injectable({
   providedIn: 'root'
 })
