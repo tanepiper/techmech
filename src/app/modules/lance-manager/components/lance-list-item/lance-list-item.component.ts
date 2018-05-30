@@ -182,7 +182,8 @@ export class TMLanceListItemComponent {
 
   onDeleteLance(event) {
     event.preventDefault();
-    const confirm = window.confirm(`Are you sure you want to delete ${this.lance.name}?`);
+    // const confirm = window.confirm(`Are you sure you want to delete ${this.lance.name}?`);
+    const confirm = true;
     if (confirm) {
       this.deleteLance.emit(this.lance);
     }
