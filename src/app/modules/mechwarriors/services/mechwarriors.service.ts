@@ -21,7 +21,9 @@ function generateUID() {
 }
 /* tslint:enable */
 
-@Injectable()
+@Injectable({
+  providedIn: 'root'
+})
 export class MechwarriorsService {
   @LocalStorage() mechwarriorGroups: Mechwarrior[] = [];
 
