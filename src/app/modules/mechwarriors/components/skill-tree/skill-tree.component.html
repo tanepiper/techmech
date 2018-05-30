@@ -8,13 +8,16 @@
   <div class="card-body">
     <div class="container">
       <div class="row">
-        <div class="col-8">
+        <div class="col">
           <div class="btn-group flex-wrap" role="group">
-            <button *ngFor="let level of 10 | levelKey; let i = index" class="skill btn" [ngClass]="{'btn-info': isActive(i, level), 'btn-default': !isActive(i, level)}"
-              (click)="onClick($event, i)">{{level}}</button>
+            <button *ngFor="let level of 10 | levelKey; let i = index" class="skill btn btn" [ngClass]="{'btn-info': isActive(i, level), 'btn-default': !isActive(i, level)}"
+              (click)="onClick($event, i)"><span class="fe fe-star"> {{i + 1}}</span></button>
           </div>
         </div>
-        <div class="col-4">
+      </div>
+      <div class="row">
+        <div class="col">
+
           <div class="card">
             <div class="card-header">
               <strong class="card-title">Level {{value}}</strong>
@@ -22,22 +25,23 @@
             <div class="card-body">
               <strong>Required XP:</strong> {{XP_LEVELS[value - 1]}}
             </div>
+
             <div class="card-body">
-              <ul>
-                <ng-template ngFor let-skill [ngForOf]="forRendering()">
-                  <li *ngIf="skill.type == 'core' && skill.bonus && skill.bonus[value - 1] > 0">
-                    <p>{{skill.effect}}: {{ (skill.bonus ? skill.bonus[value - 1] : '') | bonusText:skill.description}}</p>
+              <ul class="list-group list-group-flush">
+                <ng-template ngFor let-skill [ngForOf]="list">
+                  <li class="list-group-item" *ngIf="skill.type == 'core' && skill.bonus && skill.bonus[value - 1] > 0">
+                    <p>{{skill.name}} - {{skill.effect}}: {{ (skill.bonus ? skill.bonus[value - 1] : '') | bonusText:skill.description}}</p>
                   </li>
-                  <li *ngIf="skill.type == 'core' && skill.level && skill.level <= value">
-                    <p>{{skill.effect}}: {{skill.description}}</p>
+                  <li class="list-group-item" *ngIf="skill.type == 'core' && skill.level && skill.level <= value">
+                    <p>{{skill.name}} - {{skill.effect}}: {{skill.description}}</p>
                   </li>
-                  <li *ngIf="skill.type === 'primary' && skill.level <= value">
+                  <li class="list-group-item" *ngIf="skill.type === 'primary' && skill.level <= value">
                     <h6>Possible Primary Skills:</h6>
-                    <p>{{skill.effect}}: {{skill.name}} - {{skill.description}}</p>
+                    <p>{{skill.name}} - {{skill.effect}}: {{skill.description}}</p>
                   </li>
-                  <li *ngIf="skill.type === 'secondary' && skill.level <= value">
-                      <h6>Possible Secondary Skills:</h6>
-                    <p>{{skill.effect}}: {{skill.name}} - {{skill.description}}</p>
+                  <li class="list-group-item" *ngIf="skill.type === 'secondary' && skill.level <= value">
+                    <h6>Possible Secondary Skills:</h6>
+                    <p>{{skill.name}} - {{skill.effect}}: {{skill.description}}</p>
                   </li>
                 </ng-template>
               </ul>

@@ -60,7 +60,7 @@ export class TMSkillTreeComponent implements ControlValueAccessor {
     return false;
   }
 
-  forRendering() {
+  get list() {
     // debugger;
     return ((this.skill || {}).skills || []).sort((skillA: any, skillB: any) => {
       if (

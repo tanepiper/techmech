@@ -27,7 +27,24 @@ export class TMMechwarriorFormComponent implements OnInit {
   constructor(private fb: FormBuilder) {}
 
   firstLevelSkillsDisabled = false;
+
   secondLevelSkillsDisabled = false;
+
+  get primary() {
+    const skillKeys = Object.keys(this.skills);
+    const skills = skillKeys.map(skill => {
+      return this.skills[skill].skills.find(s => s.type === 'primary');
+    });
+    return skills;
+  }
+
+  get secondary() {
+    const skillKeys = Object.keys(this.skills);
+    const skills = skillKeys.map(skill => {
+      return this.skills[skill].skills.find(s => s.type === 'secondary');
+    });
+    return skills;
+  }
 
   ngOnInit() {
     this.mechwarriorForm = this.fb.group({
