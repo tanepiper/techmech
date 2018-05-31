@@ -64,32 +64,6 @@ export class TMMechwarriorFormComponent implements OnInit {
         third: [{ value: (this.mechwarrior.skills && this.mechwarrior.skills.third || ''), disabled: this.secondLevelSkillsDisabled }],
       })
     });
-
-    const query$ = this.mechwarriorForm.valueChanges.subscribe(form => {
-      const result = Object.keys(this.mechwarriorForm.value.stats).reduce(
-        (prev, next) => {
-          if (this.mechwarriorForm.value.stats[next] > prev) {
-            return this.mechwarriorForm.value.stats[next];
-          }
-          return prev;
-        },
-        0
-      );
-      // this.mechwarriorForm.controls.skills['first'].disable();
-      // this.mechwarriorForm.controls.skills['second'].disable();
-      // this.mechwarriorForm.controls.skills['third'].disable();
-      this.firstLevelSkillsDisabled = true;
-      this.secondLevelSkillsDisabled = true;
-      if (result >= 5) {
-        // this.mechwarriorForm.controls.skills['first'].enable();
-        // this.mechwarriorForm.controls.skills['second'].enable();
-        this.firstLevelSkillsDisabled = false;
-      }
-      if (result >= 8) {
-        // this.mechwarriorForm.controls.skills['third'].enable();
-        this.secondLevelSkillsDisabled = false;
-      }
-    }); // , error => console.log(error), () => query$.unsubsribe());
   }
 
   onSaveChanges(event) {
